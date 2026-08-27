@@ -5,57 +5,117 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Class of 2027 college application master roadmap for psychology-focused applicants, covering UC, CSU, Common App, financial aid, scholarships and application milestones.">
   <title>College Application Master Roadmap — Class of 2027</title>
-  <!-- Inlined stylesheet (replaced external assets/styles.css) -->
   <style>
-    :root{--bg:#f6f7fb;--card:#fff;--muted:#666;--accent:#2b7cff;--green:#2c9f6b;--red:#e14b4b;--purple:#7b5cff;--gold:#d4a017;--teal:#18a39b}
+    :root{
+      --navy:#071b49; --navy2:#102c65; --ink:#17233f; --muted:#64708a;
+      --green:#16803a; --green-bg:#eef9f0;
+      --blue:#1264b5; --blue-bg:#edf5ff;
+      --orange:#e56b00; --orange-bg:#fff4e9;
+      --purple:#6737a6; --purple-bg:#f5efff;
+      --teal:#087f86; --teal-bg:#eafafa;
+      --red:#c92727; --red-bg:#fff0f0;
+      --gold:#d99a00; --gold-bg:#fff9e5;
+      --line:#d7deea; --white:#fff; --shadow:0 8px 24px rgba(7,27,73,.08);
+      --radius:16px;
+    }
     *{box-sizing:border-box}
-    body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;line-height:1.45;margin:0;background:var(--bg);color:#111}
-    .wrap{max-width:1100px;margin:28px auto;padding:20px}
-    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-    .brand{display:flex;gap:12px;align-items:center}
-    .brain{font-size:36px}
-    h1{margin:0;font-size:20px}
-    .subtitle{color:var(--muted);font-size:13px}
-    .today{text-align:right;color:var(--muted)}
-    .sticky{position:sticky;top:0;background:transparent;padding:8px 0}
-    .nav{display:flex;gap:10px;flex-wrap:wrap}
-    .nav a{background:#fff;padding:8px 10px;border-radius:8px;text-decoration:none;color:#111;border:1px solid #eee}
-    .legend{margin:12px 0;display:flex;gap:8px;flex-wrap:wrap}
-    .pill{background:#fff;padding:6px 8px;border-radius:18px;border:1px solid #eee;font-size:13px}
-    .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
-    .dot.green{background:var(--green)}.dot.blue{background:#3b82f6}.dot.orange{background:#f59e0b}.dot.purple{background:var(--purple)}.dot.gold{background:var(--gold)}.dot.teal{background:var(--teal)}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:#f4f7fb;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.45}
+    a{color:inherit}
+    /* Make wrap fully fluid — removed max-width to allow timeline to span viewport */
+    .wrap{width:100%;margin:auto;padding:22px}
+    header{background:linear-gradient(120deg,var(--navy),#0c3274);color:white;border-radius:20px;padding:24px 28px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+    .brand{display:flex;gap:18px;align-items:center;min-width:0}
+    .brain{font-size:48px;filter:drop-shadow(0 2px 1px rgba(0,0,0,.25))}
+    h1{font-size:clamp(28px,4vw,52px);line-height:1;margin:0 0 8px;letter-spacing:-1.5px;min-width:0}
+    .subtitle{font-weight:700;font-size:clamp(14px,1.5vw,20px);opacity:.95}
+    .today{min-width:150px;text-align:right;background:white;color:var(--navy);border-radius:16px;padding:14px 18px;font-weight:800;justify-self:end}
+    .today .date{font-size:20px;color:var(--red);margin:4px 0}
+    .today .here{color:var(--red);font-size:13px}
+    .legend{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}
+    .pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:white;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:800}
+    .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+    .green{background:var(--green)} .blue{background:var(--blue)} .orange{background:var(--orange)}
+    .purple{background:var(--purple)} .gold{background:var(--gold)} .teal{background:var(--teal)} .red{background:var(--red)}
 
-    .section-title{font-weight:700;margin:12px 0}
-    .timeline{background:transparent}
-    .months{display:flex;gap:12px;overflow:auto;padding-bottom:8px}
-    .month{min-width:220px;background:var(--card);border-radius:8px;padding:12px;border:1px solid #eee}
-    .month.now{box-shadow:0 4px 12px rgba(0,0,0,0.04)}
-    .month-head{font-weight:700;margin-bottom:8px}
-    .tag{display:inline-block;padding:4px 8px;border-radius:12px;font-size:12px;margin-bottom:8px}
-    .tag.red{background:#ffecec;color:var(--red)}.tag.green{background:#ecfff2;color:var(--green)}.tag.purple{background:#f3eefc;color:var(--purple)}.tag.blue{background:#eef6ff;color:#1e6fff}.tag.teal{background:#e9fbf9;color:var(--teal)}
-    .task{display:block;margin:6px 0;font-size:14px;color:#222}
-    .callout{background:#fff7cc;padding:8px;border-radius:6px;margin-top:8px;border:1px solid #f0e5b8}
+    .section-title{background:var(--navy);color:#fff;border-radius:13px 13px 0 0;padding:11px 16px;font-size:17px;font-weight:900;letter-spacing:.4px}
+    .timeline{background:white;border:1px solid var(--line);border-radius:0 0 16px 16px;box-shadow:var(--shadow);overflow:hidden}
 
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
-    .card{background:var(--card);padding:12px;border-radius:8px;border:1px solid #eee}
-    .card h2{margin-top:0}
-    .card-body{color:var(--muted)}
-    table{width:100%;border-collapse:collapse}
-    td{padding:6px;border-bottom:1px solid #f3f3f3}
-    .note{font-size:13px;color:var(--muted);margin-top:8px}
+    /* Calculate month width relative to container so the timeline never scrolls horizontally.
+       We have 8 month columns; the formula subtracts total gaps then divides remaining width evenly. */
+    .months{--month-count:8; --month-gap:12px; display:flex;flex-wrap:nowrap;gap:var(--month-gap);padding:12px}
+    .month{flex:0 0 calc((100% - (var(--month-gap) * (var(--month-count) - 1))) / var(--month-count)); min-width:0; border-right:1px solid var(--line); min-height:380px}
+    .month:last-child{border-right:0}
 
-    .school-columns{display:flex;gap:12px}
-    .school-group{flex:1}
-    .school-list{padding-left:18px;margin:6px 0}
+    .month-head{padding:12px 10px;color:white;text-align:center;font-weight:950;background:var(--navy2);font-size:16px}
+    .month.now .month-head{background:var(--red)}
+    .month.dec .month-head{background:var(--teal)}
+    .month.may .month-head{background:var(--green)}
+    .month-body{padding:12px 11px}
+    .month-body h3{font-size:12px;margin:0 0 9px;text-transform:uppercase;color:var(--muted)}
+    .task{display:flex;gap:8px;margin:8px 0;font-size:12px}
+    .task input{accent-color:var(--navy);margin-top:3px;flex:0 0 auto}
+    .deadline{border:2px solid var(--red);background:var(--red-bg);border-radius:10px;padding:9px;margin:11px 0;font-size:11px;font-weight:900;color:#a21e1e}
+    .tag{display:inline-block;border-radius:8px;padding:4px 7px;font-size:10px;font-weight:900;margin-bottom:6px}
+    .tag.green{color:#0d642c;background:var(--green-bg)}
+    .tag.blue{color:#0d4e93;background:var(--blue-bg)}
+    .tag.orange{color:#9c4500;background:var(--orange-bg)}
+    .tag.purple{color:#4c287c;background:var(--purple-bg)}
+    .tag.teal{color:#07656a;background:var(--teal-bg)}
+    .callout{margin-top:14px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#f9fbfe;font-size:11px;font-weight:800;text-align:center}
 
-    .progress-wrap{display:flex;align-items:center;gap:8px}
-    progress{width:100%;height:12px;border-radius:8px}
-    .progress-num{min-width:40px;text-align:right}
+    .grid{display:grid;grid-template-columns:1.1fr 1.25fr 1.15fr 1fr;gap:14px;margin-top:16px}
+    .card{background:white;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .card h2{margin:0;padding:11px 14px;color:white;background:var(--navy);font-size:15px}
+    .card.purple h2{background:var(--purple)} .card.blue h2{background:var(--blue)} .card.orange h2{background:var(--orange)}
+    .card.teal h2{background:var(--teal)} .card.green h2{background:var(--green)}
+    .card-body{padding:14px}
+    .check{display:flex;gap:8px;margin:8px 0;font-size:12px}
+    .check input{accent-color:var(--green);margin-top:3px}
+    .small{font-size:11px;color:var(--muted)}
+    .school-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .school-group{border:1px solid var(--line);border-radius:10px;padding:10px}
+    .school-group h3{font-size:12px;margin:0 0 7px}
+    .school-group.reach h3{color:#9c6200}.school-group.target h3{color:#6c2d9a}.school-group.likely h3{color:#16733c}
+    ol.school-list{margin:0;padding-left:20px;font-size:11px}
+    ol.school-list li{padding:2px 0}
+    .platform{border:1px solid var(--line);border-radius:11px;padding:11px;margin:8px 0}
+    .platform strong{display:block;margin-bottom:3px}
+    .platform.common{border-left:5px solid var(--green)} .platform.uc{border-left:5px solid var(--blue)}
+    .platform.csu{border-left:5px solid var(--orange)} .platform.other{border-left:5px solid var(--purple)}
+    .deadlines table{width:100%;border-collapse:collapse;font-size:11px}
+    .deadlines td{border-bottom:1px solid var(--line);padding:7px 4px;vertical-align:top}
+    .deadlines td:first-child{font-weight:900;white-space:nowrap}
+    .note{font-size:10px;color:var(--muted);margin-top:10px}
+    .progress-wrap{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+    progress{width:100%;height:14px;accent-color:var(--green)}
+    .progress-num{font-weight:950;color:var(--green)}
+    footer{margin:18px 0 8px;background:var(--navy);color:white;border-radius:16px;padding:15px 18px;display:flex;justify-content:space-between;gap:15px;align-items:center;font-size:12px}
+    footer strong{color:#ffd75a}
+    .sources{font-size:10px;color:#d8e1f4}
+    .sticky{position:sticky;top:0;z-index:10;background:rgba(244,247,251,.93);backdrop-filter:blur(8px);padding:8px 0}
+    .nav{display:flex;gap:7px;overflow:auto}
+    .nav a{white-space:nowrap;text-decoration:none;background:white;border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:11px;font-weight:850}
 
-    footer{margin-top:18px;color:var(--muted);display:flex;justify-content:space-between}
+    /* Responsive adjustments: if the viewport gets very narrow, allow months to stack to preserve readability */
+    @media(max-width:720px){
+      .wrap{padding:12px}
+      header{grid-template-columns:1fr}
+      .today{margin-left:0;text-align:right;justify-self:end}
+      .grid{grid-template-columns:1fr}.school-columns{grid-template-columns:1fr}
+      /* On small screens allow months to stack vertically so the content remains legible */
+      .months{flex-wrap:wrap}
+      .month{flex:0 0 100%;border-right:0;min-height:auto}
+      footer{display:block}
+    }
 
-    /* Responsive */
-    @media (max-width:900px){.grid{grid-template-columns:1fr}.months{flex-direction:row}}
+    @media print{
+      body{background:#fff}.wrap{max-width:none;padding:8px}
+      .sticky{display:none}.card,.timeline,header{box-shadow:none}
+      .months{display:flex;grid-template-columns:repeat(8,1fr);min-width:0}
+      .month{min-height:420px}
+      @page{size:landscape; margin:8mm}
+    }
   </style>
 </head>
 <body>
@@ -228,7 +288,7 @@
           <tr><td>Mar 2027</td><td>Many UC admission decisions are released; timing varies by campus.</td></tr>
           <tr><td><strong>May 1, 2027</strong></td><td><strong>National College Decision Day / common enrollment deposit target.</strong></td></tr>
         </table>
-        <p class="note">Important: application and financial-aid deadlines change by school and cycle. Treat this page as a planning dashboard and verify each final deadline on the official school pages.</p>
+        <p class="note">Important: application and financial-aid deadlines change by school and cycle. Treat this page as a planning dashboard and verify each final deadline on the official school page.</p>
       </div>
     </section>
 
@@ -262,10 +322,10 @@
       <h2>🖥️ APPLICATION PLATFORMS</h2>
       <div class="card-body">
         <div class="platform common"><strong>🟢 Common App</strong>One application can serve hundreds of participating colleges. Usually includes a personal statement plus school-specific supplements.</div>
-        <div class="platform uc"><strong>🔵 UC Application</strong>One application for all 9 UC campuses. Includes 4 of 8 Personal Insight Questions, activities/awards and academic history.</div>
+        <div class="platform uc"><strong>🔵 UC Application</strong>One application for all 9 UC campuses. Includes 4 of 8 Personal Insight Questions, activities/awards and academic history. No recommendations or essays required for admission, but some programs may request them.</div>
         <div class="platform csu"><strong>🟠 CSU Application</strong>One CSU application for participating campuses. Requirements and supplemental materials vary; check campus/program requirements.</div>
-        <div class="platform other"><strong>🟣 Coalition / School-Specific</strong>Some colleges use Coalition or their own application. Verify the platform, testing policy, recommendations, essays and deadlines.</div>
-        <p class="note">Do not assume a school follows the “typical” Common App process. Examples of schools that can have special requirements include MIT, Georgetown and some programs at other universities.</p>
+        <div class="platform other"><strong>🟣 Coalition / School-Specific</strong>Some colleges use Coalition or their own application. Verify the platform, testing policy, recommendations, essays needed.</div>
+        <p class="note">Do not assume a school follows the "typical" Common App process. Examples of schools that can have special requirements include MIT, Georgetown and some programs at other universities. Always check the official school website.</p>
       </div>
     </section>
 
@@ -291,23 +351,23 @@
         <div class="school-group reach">
           <h3>REACH — highly selective</h3>
           <ol class="school-list">
-            <li>Stanford University</li><li>UC Berkeley</li><li>UCLA</li><li>Harvard University</li><li>Yale University</li><li>Princeton University</li><li>University of Michigan–Ann Arbor</li>
+            <li>Stanford University</li><li>UC Berkeley</li><li>UCLA</li><li>Harvard University</li><li>Yale University</li><li>Princeton University</li><li>University of Michigan–Ann Arbor</li><li>Northwestern University</li><li>CMU</li><li>UPenn</li><li>Cornell</li><li>Johns Hopkins</li><li>MIT</li><li>Duke</li><li>Stanford</li><li>UC San Diego</li><li>Caltech</li>
           </ol>
         </div>
         <div class="school-group target">
           <h3>TARGET — competitive</h3>
           <ol class="school-list" start="18">
-            <li>UC San Diego</li><li>USC</li><li>Emory University</li><li>Boston University</li><li>Tufts University</li><li>UC Davis</li><li>University of Illinois Urbana-Champaign</li>
+            <li>UC San Diego</li><li>USC</li><li>Emory University</li><li>Boston University</li><li>Tufts University</li><li>UC Davis</li><li>University of Illinois Urbana-Champaign</li><li>University of Wisconsin–Madison</li><li>University of Washington</li><li>NYU</li><li>Case Western Reserve</li><li>CMU</li><li>Rice</li><li>Vanderbilt</li><li>Wesleyan</li><li>Colby</li><li>Middlebury</li><li>Bowdoin</li>
           </ol>
         </div>
         <div class="school-group likely">
           <h3>LIKELY / SAFETY — verify fit & admission odds</h3>
           <ol class="school-list" start="35">
-            <li>UC Santa Barbara</li><li>UC Santa Cruz</li><li>UC Riverside</li><li>Fordham University</li><li>American University</li><li>Pepperdine University</li><li>University of San Diego</li>
+            <li>UC Santa Barbara</li><li>UC Santa Cruz</li><li>UC Riverside</li><li>Fordham University</li><li>American University</li><li>Pepperdine University</li><li>University of San Diego</li><li>Loyola Marymount University</li><li>Santa Clara University</li><li>University of Portland</li><li>Seattle University</li><li>Gonzaga University</li><li>University of Puget Sound</li><li>Reed College</li><li>University of Oregon</li><li>Oregon State University</li>
           </ol>
         </div>
       </div>
-      <p class="note">This is a planning shortlist, not a fixed ranking. Psychology strength, selectivity and program structure can vary by methodology and year; evaluate research opportunities, faculty and fit before making decisions.</p>
+      <p class="note">This is a planning shortlist, not a fixed ranking. Psychology strength, selectivity and program structure can vary by methodology and year; evaluate research opportunities, faculty advisors, location and overall fit.</p>
     </div>
   </section>
 
@@ -367,73 +427,47 @@
 
   <footer>
     <div><strong>YOU'VE GOT THIS.</strong> One step at a time. Stay focused and keep moving.</div>
-    <div class="sources">Planning information current as of <span id="currentDate">August 26, 2026</span>. Deadlines, testing policies, application platforms and requirements can change. Always verify details on official pages.</div>
+    <div class="sources">Planning information current as of <span id="currentDate">August 26, 2026</span>. Deadlines, testing policies, application platforms and requirements can change. Always verify on official university websites.</div>
     <div><strong>CLASS OF 2027 🎓</strong></div>
   </footer>
 </div>
 
-<!-- Inlined script (replaced external assets/timeline.js) -->
 <script>
-  (function(){
-    function formatDate(d){
-      const opts={year:'numeric',month:'long',day:'numeric'};
-      return new Date(d).toLocaleDateString(undefined,opts);
-    }
-
-    function updateDates(){
-      const today=new Date();
-      const els=document.querySelectorAll('#todayDate, #currentDate');
-      els.forEach(el=>{ el.textContent = formatDate(today); });
-    }
-
-    function initProgress(){
-      const progressEl=document.getElementById('progress');
-      const progressNum=document.getElementById('progressNum');
-      const boxes=Array.from(document.querySelectorAll('input[data-progress]'));
-      // assign stable keys
-      boxes.forEach((cb,i)=>{
-        const key = 'car:progress:' + i;
-        cb.dataset.key = key;
-        const stored = localStorage.getItem(key);
-        if(stored === '1') cb.checked = true;
-        cb.addEventListener('change', ()=>{
-          localStorage.setItem(key, cb.checked ? '1' : '0');
-          refresh();
-        });
-      });
-
-      function refresh(){
-        const total = boxes.length || 1;
-        const checked = boxes.filter(b=>b.checked).length;
-        const pct = Math.round((checked/total)*100);
-        progressEl.value = pct;
-        progressNum.textContent = pct + '%';
-      }
-
-      refresh();
-    }
-
-    // Save/restore simple task checkboxes (timeline and other tasks)
-    function initTasks(){
-      const tasks = Array.from(document.querySelectorAll('input[type=checkbox]'));
-      tasks.forEach((cb, i)=>{
-        // skip boxes already handled by data-progress
-        if(cb.hasAttribute('data-progress')) return;
-        const key = 'car:task:' + i;
-        cb.dataset.key = key;
-        const stored = localStorage.getItem(key);
-        if(stored === '1') cb.checked = true;
-        cb.addEventListener('change', ()=>{
-          localStorage.setItem(key, cb.checked ? '1' : '0');
-        });
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', ()=>{
-      updateDates();
-      initProgress();
-      initTasks();
+  // Persist checklist state locally.
+  const boxes = [...document.querySelectorAll('input[type="checkbox"]')];
+  boxes.forEach((box, i) => {
+    const key = 'college-roadmap-' + i;
+    const saved = localStorage.getItem(key);
+    if (saved !== null) box.checked = saved === '1';
+    box.addEventListener('change', () => {
+      localStorage.setItem(key, box.checked ? '1' : '0');
+      updateProgress();
     });
+  });
+
+  function updateProgress(){
+    const progressBoxes = [...document.querySelectorAll('[data-progress]')];
+    const checked = progressBoxes.filter(b => b.checked).length;
+    const pct = progressBoxes.length ? Math.round((checked / progressBoxes.length) * 100) : 0;
+    document.getElementById('progress').value = pct;
+    document.getElementById('progressNum').textContent = pct + '%';
+  }
+  updateProgress();
+
+  // Set today's date dynamically in two places: the header and the footer
+  (function setTodayDates(){
+    try{
+      const opts = { year: 'numeric', month: 'long', day: 'numeric' };
+      const today = new Date();
+      const formatted = today.toLocaleDateString(undefined, opts);
+      const hdr = document.getElementById('todayDate');
+      const ftr = document.getElementById('currentDate');
+      if(hdr) hdr.textContent = formatted;
+      if(ftr) ftr.textContent = formatted;
+    }catch(e){
+      // fail silently — keep the hard-coded fallback date if formatting fails
+      console.warn('Could not set today\'s date dynamically', e);
+    }
   })();
 </script>
 </body>
