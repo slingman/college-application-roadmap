@@ -22,13 +22,13 @@
     html{scroll-behavior:smooth}
     body{margin:0;background:#f4f7fb;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.45}
     a{color:inherit}
-    .wrap{max-width:1500px;margin:auto;padding:22px}
-    header{background:linear-gradient(120deg,var(--navy),#0c3274);color:white;border-radius:20px;padding:24px 28px;box-shadow:var(--shadow);display:flex;gap:24px;align-items:center;justify-content:spa[...]}
-    .brand{display:flex;gap:18px;align-items:center}
+    .wrap{width:100%;max-width:1500px;margin:auto;padding:22px}
+    header{background:linear-gradient(120deg,var(--navy),#0c3274);color:white;border-radius:20px;padding:24px 28px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+    .brand{display:flex;gap:18px;align-items:center;min-width:0}
     .brain{font-size:48px;filter:drop-shadow(0 2px 1px rgba(0,0,0,.25))}
-    h1{font-size:clamp(28px,4vw,52px);line-height:1;margin:0 0 8px;letter-spacing:-1.5px}
+    h1{font-size:clamp(28px,4vw,52px);line-height:1;margin:0 0 8px;letter-spacing:-1.5px;min-width:0}
     .subtitle{font-weight:700;font-size:clamp(14px,1.5vw,20px);opacity:.95}
-    .today{min-width:235px;text-align:center;background:white;color:var(--navy);border-radius:16px;padding:14px 18px;font-weight:800}
+    .today{min-width:150px;text-align:right;background:white;color:var(--navy);border-radius:16px;padding:14px 18px;font-weight:800}
     .today .date{font-size:20px;color:var(--red);margin:4px 0}
     .today .here{color:var(--red);font-size:13px}
     .legend{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}
@@ -39,7 +39,7 @@
 
     .section-title{background:var(--navy);color:#fff;border-radius:13px 13px 0 0;padding:11px 16px;font-size:17px;font-weight:900;letter-spacing:.4px}
     .timeline{background:white;border:1px solid var(--line);border-radius:0 0 16px 16px;box-shadow:var(--shadow);overflow:hidden}
-    .months{display:grid;grid-template-columns:1.15fr repeat(6,1fr) 1.05fr;min-width:1050px}
+    .months{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
     .month{border-right:1px solid var(--line);min-height:380px}
     .month:last-child{border-right:0}
     .month-head{padding:12px 10px;color:white;text-align:center;font-weight:950;background:var(--navy2);font-size:16px}
@@ -97,7 +97,9 @@
       .month{min-height:340px}
     }
     @media(max-width:720px){
-      .wrap{padding:12px} header{display:block}.today{margin-top:14px}
+      .wrap{padding:12px}
+      header{grid-template-columns:1fr auto}
+      .today{margin-left:12px}
       .grid{grid-template-columns:1fr}.school-columns{grid-template-columns:1fr}
       .months{grid-template-columns:1fr;min-width:0}
       .month{border-right:0;border-bottom:1px solid var(--line);min-height:auto}
