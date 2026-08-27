@@ -28,7 +28,7 @@
     .brain{font-size:48px;filter:drop-shadow(0 2px 1px rgba(0,0,0,.25))}
     h1{font-size:clamp(28px,4vw,52px);line-height:1;margin:0 0 8px;letter-spacing:-1.5px;min-width:0}
     .subtitle{font-weight:700;font-size:clamp(14px,1.5vw,20px);opacity:.95}
-    .today{min-width:150px;text-align:right;background:white;color:var(--navy);border-radius:16px;padding:14px 18px;font-weight:800}
+    .today{min-width:150px;text-align:right;background:white;color:var(--navy);border-radius:16px;padding:14px 18px;font-weight:800;justify-self:end}
     .today .date{font-size:20px;color:var(--red);margin:4px 0}
     .today .here{color:var(--red);font-size:13px}
     .legend{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}
@@ -39,9 +39,12 @@
 
     .section-title{background:var(--navy);color:#fff;border-radius:13px 13px 0 0;padding:11px 16px;font-size:17px;font-weight:900;letter-spacing:.4px}
     .timeline{background:white;border:1px solid var(--line);border-radius:0 0 16px 16px;box-shadow:var(--shadow);overflow:hidden}
-    .months{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-    .month{border-right:1px solid var(--line);min-height:380px}
+
+    /* Keep months on a single row — horizontal scroll if needed */
+    .months{display:flex;flex-wrap:nowrap;gap:12px;overflow-x:auto;padding:12px;-webkit-overflow-scrolling:touch}
+    .month{flex:0 0 260px;border-right:1px solid var(--line);min-height:380px}
     .month:last-child{border-right:0}
+
     .month-head{padding:12px 10px;color:white;text-align:center;font-weight:950;background:var(--navy2);font-size:16px}
     .month.now .month-head{background:var(--red)}
     .month.dec .month-head{background:var(--teal)}
@@ -93,7 +96,6 @@
     .nav a{white-space:nowrap;text-decoration:none;background:white;border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:11px;font-weight:850}
     @media(max-width:1150px){
       .grid{grid-template-columns:repeat(2,1fr)}
-      .months{grid-template-columns:repeat(4,minmax(230px,1fr));min-width:0}
       .month{min-height:340px}
     }
     @media(max-width:720px){
@@ -101,14 +103,13 @@
       header{grid-template-columns:1fr auto}
       .today{margin-left:12px}
       .grid{grid-template-columns:1fr}.school-columns{grid-template-columns:1fr}
-      .months{grid-template-columns:1fr;min-width:0}
-      .month{border-right:0;border-bottom:1px solid var(--line);min-height:auto}
+      .month{border-right:0;min-height:auto}
       footer{display:block}
     }
     @media print{
       body{background:#fff}.wrap{max-width:none;padding:8px}
       .sticky{display:none}.card,.timeline,header{box-shadow:none}
-      .months{grid-template-columns:repeat(8,1fr);min-width:0}
+      .months{display:flex;grid-template-columns:repeat(8,1fr);min-width:0}
       .month{min-height:420px}
       @page{size:landscape; margin:8mm}
     }
