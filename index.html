@@ -3,10 +3,60 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Class of 2027 college application master roadmap for psychology-focused applicants, covering UC, CSU, Common App, financial aid, scholarships and application mil[...]">
+  <meta name="description" content="Class of 2027 college application master roadmap for psychology-focused applicants, covering UC, CSU, Common App, financial aid, scholarships and application milestones.">
   <title>College Application Master Roadmap — Class of 2027</title>
-  <!-- External stylesheet kept to keep HTML clean -->
-  <link rel="stylesheet" href="assets/styles.css">
+  <!-- Inlined stylesheet (replaced external assets/styles.css) -->
+  <style>
+    :root{--bg:#f6f7fb;--card:#fff;--muted:#666;--accent:#2b7cff;--green:#2c9f6b;--red:#e14b4b;--purple:#7b5cff;--gold:#d4a017;--teal:#18a39b}
+    *{box-sizing:border-box}
+    body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;line-height:1.45;margin:0;background:var(--bg);color:#111}
+    .wrap{max-width:1100px;margin:28px auto;padding:20px}
+    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brain{font-size:36px}
+    h1{margin:0;font-size:20px}
+    .subtitle{color:var(--muted);font-size:13px}
+    .today{text-align:right;color:var(--muted)}
+    .sticky{position:sticky;top:0;background:transparent;padding:8px 0}
+    .nav{display:flex;gap:10px;flex-wrap:wrap}
+    .nav a{background:#fff;padding:8px 10px;border-radius:8px;text-decoration:none;color:#111;border:1px solid #eee}
+    .legend{margin:12px 0;display:flex;gap:8px;flex-wrap:wrap}
+    .pill{background:#fff;padding:6px 8px;border-radius:18px;border:1px solid #eee;font-size:13px}
+    .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+    .dot.green{background:var(--green)}.dot.blue{background:#3b82f6}.dot.orange{background:#f59e0b}.dot.purple{background:var(--purple)}.dot.gold{background:var(--gold)}.dot.teal{background:var(--teal)}
+
+    .section-title{font-weight:700;margin:12px 0}
+    .timeline{background:transparent}
+    .months{display:flex;gap:12px;overflow:auto;padding-bottom:8px}
+    .month{min-width:220px;background:var(--card);border-radius:8px;padding:12px;border:1px solid #eee}
+    .month.now{box-shadow:0 4px 12px rgba(0,0,0,0.04)}
+    .month-head{font-weight:700;margin-bottom:8px}
+    .tag{display:inline-block;padding:4px 8px;border-radius:12px;font-size:12px;margin-bottom:8px}
+    .tag.red{background:#ffecec;color:var(--red)}.tag.green{background:#ecfff2;color:var(--green)}.tag.purple{background:#f3eefc;color:var(--purple)}.tag.blue{background:#eef6ff;color:#1e6fff}.tag.teal{background:#e9fbf9;color:var(--teal)}
+    .task{display:block;margin:6px 0;font-size:14px;color:#222}
+    .callout{background:#fff7cc;padding:8px;border-radius:6px;margin-top:8px;border:1px solid #f0e5b8}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+    .card{background:var(--card);padding:12px;border-radius:8px;border:1px solid #eee}
+    .card h2{margin-top:0}
+    .card-body{color:var(--muted)}
+    table{width:100%;border-collapse:collapse}
+    td{padding:6px;border-bottom:1px solid #f3f3f3}
+    .note{font-size:13px;color:var(--muted);margin-top:8px}
+
+    .school-columns{display:flex;gap:12px}
+    .school-group{flex:1}
+    .school-list{padding-left:18px;margin:6px 0}
+
+    .progress-wrap{display:flex;align-items:center;gap:8px}
+    progress{width:100%;height:12px;border-radius:8px}
+    .progress-num{min-width:40px;text-align:right}
+
+    footer{margin-top:18px;color:var(--muted);display:flex;justify-content:space-between}
+
+    /* Responsive */
+    @media (max-width:900px){.grid{grid-template-columns:1fr}.months{flex-direction:row}}
+  </style>
 </head>
 <body>
 <div class="wrap">
@@ -178,7 +228,7 @@
           <tr><td>Mar 2027</td><td>Many UC admission decisions are released; timing varies by campus.</td></tr>
           <tr><td><strong>May 1, 2027</strong></td><td><strong>National College Decision Day / common enrollment deposit target.</strong></td></tr>
         </table>
-        <p class="note">Important: application and financial-aid deadlines change by school and cycle. Treat this page as a planning dashboard and verify each final deadline on the official schoo[...]</p>
+        <p class="note">Important: application and financial-aid deadlines change by school and cycle. Treat this page as a planning dashboard and verify each final deadline on the official school pages.</p>
       </div>
     </section>
 
@@ -211,11 +261,11 @@
     <section class="card" id="platforms">
       <h2>🖥️ APPLICATION PLATFORMS</h2>
       <div class="card-body">
-        <div class="platform common"><strong>🟢 Common App</strong>One application can serve hundreds of participating colleges. Usually includes a personal statement plus school-specific suppl[...]</div>
-        <div class="platform uc"><strong>🔵 UC Application</strong>One application for all 9 UC campuses. Includes 4 of 8 Personal Insight Questions, activities/awards and academic history. No Commo[...]</div>
-        <div class="platform csu"><strong>🟠 CSU Application</strong>One CSU application for participating campuses. Requirements and supplemental materials vary; check campus/program requireme[...]</div>
-        <div class="platform other"><strong>🟣 Coalition / School-Specific</strong>Some colleges use Coalition or their own application. Verify the platform, testing policy, recommendations, es[...][/div>
-        <p class="note">Do not assume a school follows the “typical” Common App process. Examples of schools that can have special requirements include MIT, Georgetown and some programs at other u[...]</p>
+        <div class="platform common"><strong>🟢 Common App</strong>One application can serve hundreds of participating colleges. Usually includes a personal statement plus school-specific supplements.</div>
+        <div class="platform uc"><strong>🔵 UC Application</strong>One application for all 9 UC campuses. Includes 4 of 8 Personal Insight Questions, activities/awards and academic history.</div>
+        <div class="platform csu"><strong>🟠 CSU Application</strong>One CSU application for participating campuses. Requirements and supplemental materials vary; check campus/program requirements.</div>
+        <div class="platform other"><strong>🟣 Coalition / School-Specific</strong>Some colleges use Coalition or their own application. Verify the platform, testing policy, recommendations, essays and deadlines.</div>
+        <p class="note">Do not assume a school follows the “typical” Common App process. Examples of schools that can have special requirements include MIT, Georgetown and some programs at other universities.</p>
       </div>
     </section>
 
@@ -241,23 +291,23 @@
         <div class="school-group reach">
           <h3>REACH — highly selective</h3>
           <ol class="school-list">
-            <li>Stanford University</li><li>UC Berkeley</li><li>UCLA</li><li>Harvard University</li><li>Yale University</li><li>Princeton University</li><li>University of Michigan–Ann Arbor</li><li>[...]</li>
+            <li>Stanford University</li><li>UC Berkeley</li><li>UCLA</li><li>Harvard University</li><li>Yale University</li><li>Princeton University</li><li>University of Michigan–Ann Arbor</li>
           </ol>
         </div>
         <div class="school-group target">
           <h3>TARGET — competitive</h3>
           <ol class="school-list" start="18">
-            <li>UC San Diego</li><li>USC</li><li>Emory University</li><li>Boston University</li><li>Tufts University</li><li>UC Davis</li><li>University of Illinois Urbana-Champaign</li><li>University[...]</li>
+            <li>UC San Diego</li><li>USC</li><li>Emory University</li><li>Boston University</li><li>Tufts University</li><li>UC Davis</li><li>University of Illinois Urbana-Champaign</li>
           </ol>
         </div>
         <div class="school-group likely">
           <h3>LIKELY / SAFETY — verify fit & admission odds</h3>
           <ol class="school-list" start="35">
-            <li>UC Santa Barbara</li><li>UC Santa Cruz</li><li>UC Riverside</li><li>Fordham University</li><li>American University</li><li>Pepperdine University</li><li>University of San Diego</li><li>[...]</li>
+            <li>UC Santa Barbara</li><li>UC Santa Cruz</li><li>UC Riverside</li><li>Fordham University</li><li>American University</li><li>Pepperdine University</li><li>University of San Diego</li>
           </ol>
         </div>
       </div>
-      <p class="note">This is a planning shortlist, not a fixed ranking. Psychology strength, selectivity and program structure can vary by methodology and year; evaluate research opportunities, facul[...]</p>
+      <p class="note">This is a planning shortlist, not a fixed ranking. Psychology strength, selectivity and program structure can vary by methodology and year; evaluate research opportunities, faculty and fit before making decisions.</p>
     </div>
   </section>
 
@@ -317,12 +367,74 @@
 
   <footer>
     <div><strong>YOU'VE GOT THIS.</strong> One step at a time. Stay focused and keep moving.</div>
-    <div class="sources">Planning information current as of <span id="currentDate">August 26, 2026</span>. Deadlines, testing policies, application platforms and requirements can change. Always verify final details on officia[...]</div>
+    <div class="sources">Planning information current as of <span id="currentDate">August 26, 2026</span>. Deadlines, testing policies, application platforms and requirements can change. Always verify details on official pages.</div>
     <div><strong>CLASS OF 2027 🎓</strong></div>
   </footer>
 </div>
 
-<!-- External JS keeps HTML clean; defer so it runs after parsing -->
-<script src="assets/timeline.js" defer></script>
+<!-- Inlined script (replaced external assets/timeline.js) -->
+<script>
+  (function(){
+    function formatDate(d){
+      const opts={year:'numeric',month:'long',day:'numeric'};
+      return new Date(d).toLocaleDateString(undefined,opts);
+    }
+
+    function updateDates(){
+      const today=new Date();
+      const els=document.querySelectorAll('#todayDate, #currentDate');
+      els.forEach(el=>{ el.textContent = formatDate(today); });
+    }
+
+    function initProgress(){
+      const progressEl=document.getElementById('progress');
+      const progressNum=document.getElementById('progressNum');
+      const boxes=Array.from(document.querySelectorAll('input[data-progress]'));
+      // assign stable keys
+      boxes.forEach((cb,i)=>{
+        const key = 'car:progress:' + i;
+        cb.dataset.key = key;
+        const stored = localStorage.getItem(key);
+        if(stored === '1') cb.checked = true;
+        cb.addEventListener('change', ()=>{
+          localStorage.setItem(key, cb.checked ? '1' : '0');
+          refresh();
+        });
+      });
+
+      function refresh(){
+        const total = boxes.length || 1;
+        const checked = boxes.filter(b=>b.checked).length;
+        const pct = Math.round((checked/total)*100);
+        progressEl.value = pct;
+        progressNum.textContent = pct + '%';
+      }
+
+      refresh();
+    }
+
+    // Save/restore simple task checkboxes (timeline and other tasks)
+    function initTasks(){
+      const tasks = Array.from(document.querySelectorAll('input[type=checkbox]'));
+      tasks.forEach((cb, i)=>{
+        // skip boxes already handled by data-progress
+        if(cb.hasAttribute('data-progress')) return;
+        const key = 'car:task:' + i;
+        cb.dataset.key = key;
+        const stored = localStorage.getItem(key);
+        if(stored === '1') cb.checked = true;
+        cb.addEventListener('change', ()=>{
+          localStorage.setItem(key, cb.checked ? '1' : '0');
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      updateDates();
+      initProgress();
+      initTasks();
+    });
+  })();
+</script>
 </body>
 </html>
