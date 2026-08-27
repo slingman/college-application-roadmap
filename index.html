@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Class of 2027 college application master roadmap for psychology-focused applicants, covering UC, CSU, Common App, financial aid, scholarships and application milestones.">
+  <title>College Application Master Roadmap — Class of 2027</title>
+  <style>
+    :root{
+      --navy:#071b49; --navy2:#102c65; --ink:#17233f; --muted:#64708a;
+      --green:#16803a; --green-bg:#eef9f0;
+      --blue:#1264b5; --blue-bg:#edf5ff;
+      --orange:#e56b00; --orange-bg:#fff4e9;
+      --purple:#6737a6; --purple-bg:#f5efff;
+      --teal:#087f86; --teal-bg:#eafafa;
+      --red:#c92727; --red-bg:#fff0f0;
+      --gold:#d99a00; --gold-bg:#fff9e5;
+      --line:#d7deea; --white:#fff; --shadow:0 8px 24px rgba(7,27,73,.08);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:#f4f7fb;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.45}
+    a{color:inherit}
+    .wrap{max-width:1500px;margin:auto;padding:22px}
+    header{background:linear-gradient(120deg,var(--navy),#0c3274);color:white;border-radius:20px;padding:24px 28px;box-shadow:var(--shadow);display:flex;gap:24px;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:18px;align-items:center}
+    .brain{font-size:48px;filter:drop-shadow(0 2px 1px rgba(0,0,0,.25))}
+    h1{font-size:clamp(28px,4vw,52px);line-height:1;margin:0 0 8px;letter-spacing:-1.5px}
+    .subtitle{font-weight:700;font-size:clamp(14px,1.5vw,20px);opacity:.95}
+    .today{min-width:235px;text-align:center;background:white;color:var(--navy);border-radius:16px;padding:14px 18px;font-weight:800}
+    .today .date{font-size:20px;color:var(--red);margin:4px 0}
+    .today .here{color:var(--red);font-size:13px}
+    .legend{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}
+    .pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:white;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:800}
+    .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+    .green{background:var(--green)} .blue{background:var(--blue)} .orange{background:var(--orange)}
+    .purple{background:var(--purple)} .gold{background:var(--gold)} .teal{background:var(--teal)} .red{background:var(--red)}
+
+    .section-title{background:var(--navy);color:#fff;border-radius:13px 13px 0 0;padding:11px 16px;font-size:17px;font-weight:900;letter-spacing:.4px}
+    .timeline{background:white;border:1px solid var(--line);border-radius:0 0 16px 16px;box-shadow:var(--shadow);overflow:hidden}
+    .months{display:grid;grid-template-columns:1.15fr repeat(6,1fr) 1.05fr;min-width:1050px}
+    .month{border-right:1px solid var(--line);min-height:380px}
+    .month:last-child{border-right:0}
+    .month-head{padding:12px 10px;color:white;text-align:center;font-weight:950;background:var(--navy2);font-size:16px}
+    .month.now .month-head{background:var(--red)}
+    .month.dec .month-head{background:var(--teal)}
+    .month.may .month-head{background:var(--green)}
+    .month-body{padding:12px 11px}
+    .month-body h3{font-size:12px;margin:0 0 9px;text-transform:uppercase;color:var(--muted)}
+    .task{display:flex;gap:8px;margin:8px 0;font-size:12px}
+    .task input{accent-color:var(--navy);margin-top:3px;flex:0 0 auto}
+    .deadline{border:2px solid var(--red);background:var(--red-bg);border-radius:10px;padding:9px;margin:11px 0;font-size:11px;font-weight:900;color:#a21e1e}
+    .tag{display:inline-block;border-radius:8px;padding:4px 7px;font-size:10px;font-weight:900;margin-bottom:6px}
+    .tag.green{color:#0d642c;background:var(--green-bg)}
+    .tag.blue{color:#0d4e93;background:var(--blue-bg)}
+    .tag.orange{color:#9c4500;background:var(--orange-bg)}
+    .tag.purple{color:#4c287c;background:var(--purple-bg)}
+    .tag.teal{color:#07656a;background:var(--teal-bg)}
+    .callout{margin-top:14px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#f9fbfe;font-size:11px;font-weight:800;text-align:center}
+
+    .grid{display:grid;grid-template-columns:1.1fr 1.25fr 1.15fr 1fr;gap:14px;margin-top:16px}
+    .card{background:white;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .card h2{margin:0;padding:11px 14px;color:white;background:var(--navy);font-size:15px}
+    .card.purple h2{background:var(--purple)} .card.blue h2{background:var(--blue)} .card.orange h2{background:var(--orange)}
+    .card.teal h2{background:var(--teal)} .card.green h2{background:var(--green)}
+    .card-body{padding:14px}
+    .check{display:flex;gap:8px;margin:8px 0;font-size:12px}
+    .check input{accent-color:var(--green);margin-top:3px}
+    .small{font-size:11px;color:var(--muted)}
+    .school-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .school-group{border:1px solid var(--line);border-radius:10px;padding:10px}
+    .school-group h3{font-size:12px;margin:0 0 7px}
+    .school-group.reach h3{color:#9c6200}.school-group.target h3{color:#6c2d9a}.school-group.likely h3{color:#16733c}
+    ol.school-list{margin:0;padding-left:20px;font-size:11px}
+    ol.school-list li{padding:2px 0}
+    .platform{border:1px solid var(--line);border-radius:11px;padding:11px;margin:8px 0}
+    .platform strong{display:block;margin-bottom:3px}
+    .platform.common{border-left:5px solid var(--green)} .platform.uc{border-left:5px solid var(--blue)}
+    .platform.csu{border-left:5px solid var(--orange)} .platform.other{border-left:5px solid var(--purple)}
+    .deadlines table{width:100%;border-collapse:collapse;font-size:11px}
+    .deadlines td{border-bottom:1px solid var(--line);padding:7px 4px;vertical-align:top}
+    .deadlines td:first-child{font-weight:900;white-space:nowrap}
+    .note{font-size:10px;color:var(--muted);margin-top:10px}
+    .progress-wrap{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+    progress{width:100%;height:14px;accent-color:var(--green)}
+    .progress-num{font-weight:950;color:var(--green)}
+    footer{margin:18px 0 8px;background:var(--navy);color:white;border-radius:16px;padding:15px 18px;display:flex;justify-content:space-between;gap:15px;align-items:center;font-size:12px}
+    footer strong{color:#ffd75a}
+    .sources{font-size:10px;color:#d8e1f4}
+    .sticky{position:sticky;top:0;z-index:10;background:rgba(244,247,251,.93);backdrop-filter:blur(8px);padding:8px 0}
+    .nav{display:flex;gap:7px;overflow:auto}
+    .nav a{white-space:nowrap;text-decoration:none;background:white;border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:11px;font-weight:850}
+    @media(max-width:1150px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .months{grid-template-columns:repeat(4,minmax(230px,1fr));min-width:0}
+      .month{min-height:340px}
+    }
+    @media(max-width:720px){
+      .wrap{padding:12px} header{display:block}.today{margin-top:14px}
+      .grid{grid-template-columns:1fr}.school-columns{grid-template-columns:1fr}
+      .months{grid-template-columns:1fr;min-width:0}
+      .month{border-right:0;border-bottom:1px solid var(--line);min-height:auto}
+      footer{display:block}
+    }
+    @media print{
+      body{background:#fff}.wrap{max-width:none;padding:8px}
+      .sticky{display:none}.card,.timeline,header{box-shadow:none}
+      .months{grid-template-columns:repeat(8,1fr);min-width:0}
+      .month{min-height:420px}
+      @page{size:landscape; margin:8mm}
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="brain">🧠</div>
+      <div>
+        <h1>College Application Master Roadmap</h1>
+        <div class="subtitle">Class of 2027 · Psychology Major Focus · Top 50 Universities · California Colleges (UC / CSU / Private)</div>
+      </div>
+    </div>
+    <div class="today">
+      <div>📅 TODAY'S DATE</div>
+      <div class="date">August 26, 2026</div>
+      <div class="here">📍 YOU ARE HERE — Senior Year</div>
+    </div>
+  </header>
+
+  <div class="sticky">
+    <nav class="nav">
+      <a href="#timeline">Timeline</a><a href="#schools">Top 50</a><a href="#platforms">Application Platforms</a>
+      <a href="#deadlines">Deadlines</a><a href="#aid">Financial Aid</a><a href="#psych">Psychology Prep</a>
+    </nav>
+  </div>
+
+  <div class="legend">
+    <span class="pill"><i class="dot green"></i> Common App</span>
+    <span class="pill"><i class="dot blue"></i> UC-specific</span>
+    <span class="pill"><i class="dot orange"></i> CSU-specific</span>
+    <span class="pill"><i class="dot purple"></i> Financial Aid & Scholarships</span>
+    <span class="pill"><i class="dot gold"></i> School-specific / Exceptions</span>
+    <span class="pill"><i class="dot teal"></i> Testing & Assessments</span>
+  </div>
+
+  <section id="timeline">
+    <div class="section-title">CLASS OF 2027 — SENIOR-YEAR APPLICATION TIMELINE</div>
+    <div class="timeline">
+      <div class="months">
+        <article class="month now">
+          <div class="month-head">AUG 26–31<br>2026 · RIGHT NOW</div>
+          <div class="month-body">
+            <span class="tag red">LAUNCH / PREPARE</span>
+            <label class="task"><input type="checkbox">Finalize balanced college list (Reach / Target / Likely)</label>
+            <label class="task"><input type="checkbox">Create / finish Common App account</label>
+            <label class="task"><input type="checkbox">Create / finish UC Application account</label>
+            <label class="task"><input type="checkbox">Finalize Activities List and résumé</label>
+            <label class="task"><input type="checkbox">Request teacher recommendations</label>
+            <label class="task"><input type="checkbox">Meet with counselor</label>
+            <label class="task"><input type="checkbox">Draft Common App personal statement</label>
+            <label class="task"><input type="checkbox">Draft UC PIQs</label>
+            <label class="task"><input type="checkbox">Schedule any remaining SAT/ACT if needed</label>
+            <label class="task"><input type="checkbox">Create scholarship tracker</label>
+            <div class="callout">🚨 SCHOOL IS STARTING NOW — GET THE FOUNDATION DONE FIRST.</div>
+          </div>
+        </article>
+
+        <article class="month">
+          <div class="month-head">SEP<br>2026</div>
+          <div class="month-body">
+            <span class="tag green">POLISH & PLAN</span>
+            <label class="task"><input type="checkbox">Finish Common App essay</label>
+            <label class="task"><input type="checkbox">Complete all 4 UC PIQs</label>
+            <label class="task"><input type="checkbox">Start supplemental essays</label>
+            <label class="task"><input type="checkbox">Finalize activities descriptions</label>
+            <label class="task"><input type="checkbox">Confirm recommendation letters</label>
+            <label class="task"><input type="checkbox">Research honors / special programs</label>
+            <label class="task"><input type="checkbox">Build application calendar</label>
+            <label class="task"><input type="checkbox">Attend college fairs / info sessions</label>
+            <label class="task"><input type="checkbox">Review testing policies</label>
+          </div>
+        </article>
+
+        <article class="month">
+          <div class="month-head">OCT<br>2026</div>
+          <div class="month-body">
+            <span class="tag purple">FINANCIAL AID + EARLY APPS</span>
+            <label class="task"><input type="checkbox">FAFSA opens — Oct 1 (expected)</label>
+            <label class="task"><input type="checkbox">California Dream Act — check opening</label>
+            <label class="task"><input type="checkbox">CSS Profile — check participating schools</label>
+            <label class="task"><input type="checkbox">Submit Early Action / Early Decision apps if ready</label>
+            <label class="task"><input type="checkbox">Finish and review UC + CSU sections</label>
+            <label class="task"><input type="checkbox">Continue supplemental essays</label>
+            <label class="task"><input type="checkbox">Check applicant portals</label>
+          </div>
+        </article>
+
+        <article class="month">
+          <div class="month-head">NOV<br>2026</div>
+          <div class="month-body">
+            <span class="tag blue">MAJOR DEADLINE MONTH</span>
+            <div class="deadline">⭐ UC + CSU APPLICATION DEADLINE<br>November 30, 2026 · 11:59 PM Pacific<br><small>No extensions — submit early.</small></div>
+            <label class="task"><input type="checkbox">Early Action / Early Decision deadlines — verify each school</label>
+            <label class="task"><input type="checkbox">USC merit scholarship deadline — verify current cycle</label>
+            <label class="task"><input type="checkbox">Submit UC application well before Nov 30</label>
+            <label class="task"><input type="checkbox">Submit CSU application well before Nov 30</label>
+            <label class="task"><input type="checkbox">Continue Regular Decision applications</label>
+            <label class="task"><input type="checkbox">Track scholarships and recommendations</label>
+            <div class="callout">⏰ DON'T WAIT UNTIL NOVEMBER 30.</div>
+          </div>
+        </article>
+
+        <article class="month dec">
+          <div class="month-head">DEC<br>2026</div>
+          <div class="month-body">
+            <span class="tag teal">AFTER THE DEADLINE</span>
+            <label class="task"><input type="checkbox">Confirm UC / CSU applications were submitted</label>
+            <label class="task"><input type="checkbox">Monitor portals for missing items</label>
+            <label class="task"><input type="checkbox">Prepare for interviews, if offered</label>
+            <label class="task"><input type="checkbox">Finish remaining private-school supplements</label>
+            <label class="task"><input type="checkbox">Send thank-you notes to recommenders</label>
+            <label class="task"><input type="checkbox">Continue Regular Decision applications</label>
+            <div class="callout">📌 DECEMBER IS NOT THE UC/CSU SUBMISSION MONTH — THE NOV. 30 DEADLINE HAS PASSED.</div>
+          </div>
+        </article>
+
+        <article class="month">
+          <div class="month-head">JAN<br>2027</div>
+          <div class="month-body">
+            <span class="tag green">REGULAR DECISION</span>
+            <label class="task"><input type="checkbox">Regular Decision deadlines — often Jan 1–15; verify each school</label>
+            <label class="task"><input type="checkbox">Submit mid-year transcript when requested</label>
+            <label class="task"><input type="checkbox">Continue scholarship applications</label>
+            <label class="task"><input type="checkbox">Update applicant portals</label>
+            <label class="task"><input type="checkbox">Thank teachers / counselor</label>
+            <label class="task"><input type="checkbox">Stay organized</label>
+          </div>
+        </article>
+
+        <article class="month">
+          <div class="month-head">FEB–APR<br>2027</div>
+          <div class="month-body">
+            <span class="tag blue">DECISIONS & NEXT STEPS</span>
+            <label class="task"><input type="checkbox">Attend interviews / admitted-student events</label>
+            <label class="task"><input type="checkbox">Track admission decisions</label>
+            <label class="task"><input type="checkbox">Review financial aid offers</label>
+            <label class="task"><input type="checkbox">Compare total college costs</label>
+            <label class="task"><input type="checkbox">Visit campuses if possible</label>
+            <label class="task"><input type="checkbox">Research housing and course offerings</label>
+            <label class="task"><input type="checkbox">Continue scholarship search</label>
+          </div>
+        </article>
+
+        <article class="month may">
+          <div class="month-head">MAY 1<br>2027 · DECISION DAY</div>
+          <div class="month-body">
+            <span class="tag green">🎓 NATIONAL DECISION DAY</span>
+            <label class="task"><input type="checkbox">Make final college decision</label>
+            <label class="task"><input type="checkbox">Submit enrollment deposit by May 1</label>
+            <label class="task"><input type="checkbox">Complete housing deposit / application</label>
+            <label class="task"><input type="checkbox">Notify other schools</label>
+            <label class="task"><input type="checkbox">Request final transcript</label>
+            <label class="task"><input type="checkbox">Celebrate!</label>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="grid">
+    <section class="card deadlines" id="deadlines">
+      <h2>📅 KEY DEADLINES AT A GLANCE</h2>
+      <div class="card-body">
+        <table>
+          <tr><td>Aug 1, 2026</td><td>Common App and UC applications open for the 2026–27 cycle.</td></tr>
+          <tr><td>Oct 1, 2026</td><td>FAFSA is expected to open; check official FAFSA/college guidance. California Dream Act and CSS Profile timing should also be verified.</td></tr>
+          <tr><td>Nov 1, 2026</td><td>Many Early Action / Early Decision deadlines. School-specific scholarship deadlines may also fall here.</td></tr>
+          <tr><td><strong>Nov 30, 2026</strong></td><td><strong>UC application deadline: 11:59 PM Pacific. CSU application deadline: 11:59 PM Pacific.</strong></td></tr>
+          <tr><td>Jan 1–15, 2027</td><td>Many Regular Decision deadlines; exact date varies by school.</td></tr>
+          <tr><td>Mar 2027</td><td>Many UC admission decisions are released; timing varies by campus.</td></tr>
+          <tr><td><strong>May 1, 2027</strong></td><td><strong>National College Decision Day / common enrollment deposit target.</strong></td></tr>
+        </table>
+        <p class="note">Important: application and financial-aid deadlines change by school and cycle. Treat this page as a planning dashboard and verify each final deadline on the official school/application website.</p>
+      </div>
+    </section>
+
+    <section class="card" id="psych">
+      <h2>🧠 PSYCHOLOGY APPLICANT CHECKLIST</h2>
+      <div class="card-body">
+        <strong>Academic preparation</strong>
+        <label class="check"><input type="checkbox">AP Psychology / relevant psychology coursework</label>
+        <label class="check"><input type="checkbox">Statistics / AP Statistics</label>
+        <label class="check"><input type="checkbox">Biology / AP Biology where appropriate</label>
+        <label class="check"><input type="checkbox">Research methods / research experience</label>
+        <label class="check"><input type="checkbox">Strong writing and critical thinking</label>
+        <hr>
+        <strong>Experience & involvement</strong>
+        <label class="check"><input type="checkbox">Psychology / mental-health-related club</label>
+        <label class="check"><input type="checkbox">Research experience — lab, university, or independent</label>
+        <label class="check"><input type="checkbox">Volunteering with people / service organizations</label>
+        <label class="check"><input type="checkbox">Shadowing psychologists / behavioral professionals where appropriate</label>
+        <label class="check"><input type="checkbox">Leadership and initiative</label>
+        <label class="check"><input type="checkbox">Diversity, equity and inclusion activities</label>
+        <hr>
+        <strong>Build the narrative</strong>
+        <label class="check"><input type="checkbox">Connect experiences to psychology and people</label>
+        <label class="check"><input type="checkbox">Show sustained interest and impact</label>
+        <label class="check"><input type="checkbox">Reflect on growth and learning</label>
+        <label class="check"><input type="checkbox">Highlight curiosity, empathy and communication</label>
+      </div>
+    </section>
+
+    <section class="card" id="platforms">
+      <h2>🖥️ APPLICATION PLATFORMS</h2>
+      <div class="card-body">
+        <div class="platform common"><strong>🟢 Common App</strong>One application can serve hundreds of participating colleges. Usually includes a personal statement plus school-specific supplements, activities, recommendations and transcript/school information.</div>
+        <div class="platform uc"><strong>🔵 UC Application</strong>One application for all 9 UC campuses. Includes 4 of 8 Personal Insight Questions, activities/awards and academic history. No Common App personal statement.</div>
+        <div class="platform csu"><strong>🟠 CSU Application</strong>One CSU application for participating campuses. Requirements and supplemental materials vary; check campus/program requirements.</div>
+        <div class="platform other"><strong>🟣 Coalition / School-Specific</strong>Some colleges use Coalition or their own application. Verify the platform, testing policy, recommendations, essays and deadlines individually.</div>
+        <p class="note">Do not assume a school follows the “typical” Common App process. Examples of schools that can have special requirements include MIT, Georgetown and some programs at other universities.</p>
+      </div>
+    </section>
+
+    <section class="card purple" id="aid">
+      <h2>💜 FINANCIAL AID & SCHOLARSHIPS</h2>
+      <div class="card-body">
+        <label class="check"><input type="checkbox">FAFSA — opens for the 2027–28 cycle when officially released</label>
+        <label class="check"><input type="checkbox">California Dream Act — if applicable</label>
+        <label class="check"><input type="checkbox">CSS Profile — for participating private colleges</label>
+        <label class="check"><input type="checkbox">Institutional scholarships — check each school</label>
+        <label class="check"><input type="checkbox">Private scholarships — local, national and field-specific</label>
+        <label class="check"><input type="checkbox">Track every scholarship deadline and requirement</label>
+        <label class="check"><input type="checkbox">Create calendar reminders</label>
+        <div class="callout">💡 Keep a single spreadsheet for applications, essays, recommendations, financial aid, scholarships and decisions.</div>
+      </div>
+    </section>
+  </div>
+
+  <section class="card" id="schools" style="margin-top:16px">
+    <h2>🏫 TOP 50 PSYCHOLOGY PROGRAMS TO CONSIDER</h2>
+    <div class="card-body">
+      <div class="school-columns">
+        <div class="school-group reach">
+          <h3>REACH — highly selective</h3>
+          <ol class="school-list">
+            <li>Stanford University</li><li>UC Berkeley</li><li>UCLA</li><li>Harvard University</li><li>Yale University</li><li>Princeton University</li><li>University of Michigan–Ann Arbor</li><li>University of Virginia</li><li>Columbia University</li><li>University of Washington</li><li>University of Chicago</li><li>Johns Hopkins University</li><li>NYU</li><li>UPenn</li><li>Duke University</li><li>Northwestern University</li><li>Brown University</li>
+          </ol>
+        </div>
+        <div class="school-group target">
+          <h3>TARGET — competitive</h3>
+          <ol class="school-list" start="18">
+            <li>UC San Diego</li><li>USC</li><li>Emory University</li><li>Boston University</li><li>Tufts University</li><li>UC Davis</li><li>University of Illinois Urbana-Champaign</li><li>University of Wisconsin–Madison</li><li>Georgia Tech</li><li>Boston College</li><li>Northeastern University</li><li>Purdue University</li><li>University of Texas at Austin</li><li>University of Maryland</li><li>Lehigh University</li><li>Santa Clara University</li><li>University of Miami</li>
+          </ol>
+        </div>
+        <div class="school-group likely">
+          <h3>LIKELY / SAFETY — verify fit & admission odds</h3>
+          <ol class="school-list" start="35">
+            <li>UC Santa Barbara</li><li>UC Santa Cruz</li><li>UC Riverside</li><li>Fordham University</li><li>American University</li><li>Pepperdine University</li><li>University of San Diego</li><li>Michigan State University</li><li>University of Oregon</li><li>Colorado State University</li><li>University of Arizona</li><li>University of Iowa</li><li>Drexel University</li><li>Seattle University</li><li>Loyola Marymount University</li>
+          </ol>
+        </div>
+      </div>
+      <p class="note">This is a planning shortlist, not a fixed ranking. Psychology strength, selectivity and program structure can vary by methodology and year; evaluate research opportunities, faculty, undergraduate experience, cost and outcomes—not just rank.</p>
+    </div>
+  </section>
+
+  <div class="grid">
+    <section class="card" style="grid-column:span 2">
+      <h2>🔎 SAMPLE APPLICATION QUICK REFERENCE</h2>
+      <div class="card-body" style="overflow:auto">
+        <table class="deadlines">
+          <thead><tr><td>School</td><td>Platform</td><td>Essays</td><td>Recommendations</td><td>Interview</td><td>Typical RD</td></tr></thead>
+          <tbody>
+            <tr><td>Stanford</td><td>Common App</td><td>Personal + supplements</td><td>School-specific</td><td>May be offered</td><td>Verify current cycle</td></tr>
+            <tr><td>UCLA</td><td>UC App</td><td>4 PIQs</td><td>No routine letters</td><td>No routine interview</td><td>Nov 30 UC deadline</td></tr>
+            <tr><td>USC</td><td>Common App</td><td>Personal + supplements</td><td>Program-dependent</td><td>May be offered</td><td>Verify current cycle</td></tr>
+            <tr><td>UC Berkeley</td><td>UC App</td><td>4 PIQs</td><td>No routine letters</td><td>No routine interview</td><td>Nov 30 UC deadline</td></tr>
+            <tr><td>UC San Diego</td><td>UC App</td><td>4 PIQs</td><td>No routine letters</td><td>No routine interview</td><td>Nov 30 UC deadline</td></tr>
+            <tr><td>Boston University</td><td>Common App</td><td>Personal + supplement(s)</td><td>Check current cycle</td><td>Check current cycle</td><td>Verify current cycle</td></tr>
+            <tr><td>University of Michigan</td><td>Common App</td><td>Personal + supplements</td><td>Check current cycle</td><td>Check current cycle</td><td>Verify current cycle</td></tr>
+            <tr><td>Georgia Tech</td><td>Common App</td><td>Personal + supplements</td><td>Check current cycle</td><td>Check current cycle</td><td>Verify current cycle</td></tr>
+          </tbody>
+        </table>
+        <p class="note">The sample table intentionally avoids hard-coding potentially stale school-by-school requirements. Use each university's official admissions page before submitting.</p>
+      </div>
+    </section>
+
+    <section class="card teal">
+      <h2>📈 APPLICATION PROGRESS</h2>
+      <div class="card-body">
+        <div class="progress-wrap"><progress id="progress" value="12" max="100"></progress><span class="progress-num" id="progressNum">12%</span></div>
+        <label class="check"><input type="checkbox" data-progress>College list</label>
+        <label class="check"><input type="checkbox" data-progress>Common App account</label>
+        <label class="check"><input type="checkbox" data-progress>UC account</label>
+        <label class="check"><input type="checkbox" data-progress>Activities / résumé</label>
+        <label class="check"><input type="checkbox" data-progress>Recommendations</label>
+        <label class="check"><input type="checkbox" data-progress>Common App essay</label>
+        <label class="check"><input type="checkbox" data-progress>UC PIQs</label>
+        <label class="check"><input type="checkbox" data-progress>Supplemental essays</label>
+        <label class="check"><input type="checkbox" data-progress>Financial aid</label>
+        <label class="check"><input type="checkbox" data-progress>Scholarships</label>
+        <p class="small">Checkboxes are saved in this browser automatically.</p>
+      </div>
+    </section>
+
+    <section class="card green">
+      <h2>✅ SUCCESS STRATEGIES</h2>
+      <div class="card-body">
+        <div class="check">✓ Start early and avoid last-minute stress.</div>
+        <div class="check">✓ Use a spreadsheet or planner to track every application.</div>
+        <div class="check">✓ Communicate with teachers and counselor.</div>
+        <div class="check">✓ Show quality and impact—not just quantity—in activities.</div>
+        <div class="check">✓ Proofread every submission.</div>
+        <div class="check">✓ Ask for help when you need it.</div>
+        <div class="check">✓ Compare net cost, aid and outcomes—not sticker price alone.</div>
+        <div class="check">✓ Protect sleep, health and balance during application season.</div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div><strong>YOU'VE GOT THIS.</strong> One step at a time. Stay focused and keep moving.</div>
+    <div class="sources">Planning information current as of August 26, 2026. Deadlines, testing policies, application platforms and requirements can change. Always verify final details on official university, UC, CSU, Common App, FAFSA and CSS Profile websites.</div>
+    <div><strong>CLASS OF 2027 🎓</strong></div>
+  </footer>
+</div>
+
+<script>
+  // Persist checklist state locally.
+  const boxes = [...document.querySelectorAll('input[type="checkbox"]')];
+  boxes.forEach((box, i) => {
+    const key = 'college-roadmap-' + i;
+    const saved = localStorage.getItem(key);
+    if (saved !== null) box.checked = saved === '1';
+    box.addEventListener('change', () => {
+      localStorage.setItem(key, box.checked ? '1' : '0');
+      updateProgress();
+    });
+  });
+
+  function updateProgress(){
+    const progressBoxes = [...document.querySelectorAll('[data-progress]')];
+    const checked = progressBoxes.filter(b => b.checked).length;
+    const pct = progressBoxes.length ? Math.round((checked / progressBoxes.length) * 100) : 0;
+    document.getElementById('progress').value = pct;
+    document.getElementById('progressNum').textContent = pct + '%';
+  }
+  updateProgress();
+</script>
+</body>
+</html>
