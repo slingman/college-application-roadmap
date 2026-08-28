@@ -24,7 +24,7 @@
     a{color:inherit}
     /* Make wrap fully fluid — removed max-width to allow timeline to span viewport */
     .wrap{width:100%;margin:auto;padding:22px}
-    header{background:linear-gradient(120deg,var(--navy),#0c3274);color:white;border-radius:20px;padding:24px 28px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+    header{background:linear-gradient(120deg,var(--navy),#0c3274);color:white;border-radius:20px;padding:24px 28px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
     .brand{display:flex;gap:18px;align-items:center;min-width:0}
     .brain{font-size:48px;filter:drop-shadow(0 2px 1px rgba(0,0,0,.25))}
     h1{font-size:clamp(28px,4vw,52px);line-height:1;margin:0 0 8px;letter-spacing:-1.5px;min-width:0}
@@ -322,10 +322,10 @@
       <h2>🖥️ APPLICATION PLATFORMS</h2>
       <div class="card-body">
         <div class="platform common"><strong>🟢 Common App</strong>One application can serve hundreds of participating colleges. Usually includes a personal statement plus school-specific supplements.</div>
-        <div class="platform uc"><strong>🔵 UC Application</strong>One application for all 9 UC campuses. Includes 4 of 8 Personal Insight Questions, activities/awards and academic history. No recommendations or essays required for admission, but some programs may request them.</div>
+        <div class="platform uc"><strong>🔵 UC Application</strong>One application for all 9 UC campuses. Includes 4 of 8 Personal Insight Questions, activities/awards and academic history. No recommendations required.</div>
         <div class="platform csu"><strong>🟠 CSU Application</strong>One CSU application for participating campuses. Requirements and supplemental materials vary; check campus/program requirements.</div>
-        <div class="platform other"><strong>🟣 Coalition / School-Specific</strong>Some colleges use Coalition or their own application. Verify the platform, testing policy, recommendations, essays needed.</div>
-        <p class="note">Do not assume a school follows the "typical" Common App process. Examples of schools that can have special requirements include MIT, Georgetown and some programs at other universities. Always check the official school website.</p>
+        <div class="platform other"><strong>🟣 Coalition / School-Specific</strong>Some colleges use Coalition or their own application. Verify the platform, testing policy, recommendations, essays and supplemental essays.</div>
+        <p class="note">Do not assume a school follows the "typical" Common App process. Examples of schools that can have special requirements include MIT, Georgetown and some programs at other universities.</p>
       </div>
     </section>
 
@@ -351,23 +351,23 @@
         <div class="school-group reach">
           <h3>REACH — highly selective</h3>
           <ol class="school-list">
-            <li>Stanford University</li><li>UC Berkeley</li><li>UCLA</li><li>Harvard University</li><li>Yale University</li><li>Princeton University</li><li>University of Michigan–Ann Arbor</li><li>Northwestern University</li><li>CMU</li><li>UPenn</li><li>Cornell</li><li>Johns Hopkins</li><li>MIT</li><li>Duke</li><li>Stanford</li><li>UC San Diego</li><li>Caltech</li>
+            <li>Stanford University</li><li>UC Berkeley</li><li>UCLA</li><li>Harvard University</li><li>Yale University</li><li>Princeton University</li><li>University of Michigan–Ann Arbor</li><li>Northwestern University</li><li>Duke University</li><li>University of Pennsylvania</li><li>Johns Hopkins University</li><li>Columbia University</li><li>Cornell University</li><li>Brown University</li><li>Vanderbilt University</li><li>Washington University in St. Louis</li><li>Carnegie Mellon University</li>
           </ol>
         </div>
         <div class="school-group target">
           <h3>TARGET — competitive</h3>
           <ol class="school-list" start="18">
-            <li>UC San Diego</li><li>USC</li><li>Emory University</li><li>Boston University</li><li>Tufts University</li><li>UC Davis</li><li>University of Illinois Urbana-Champaign</li><li>University of Wisconsin–Madison</li><li>University of Washington</li><li>NYU</li><li>Case Western Reserve</li><li>CMU</li><li>Rice</li><li>Vanderbilt</li><li>Wesleyan</li><li>Colby</li><li>Middlebury</li><li>Bowdoin</li>
+            <li>UC San Diego</li><li>USC</li><li>Emory University</li><li>Boston University</li><li>Tufts University</li><li>UC Davis</li><li>University of Illinois Urbana-Champaign</li><li>University of Wisconsin–Madison</li><li>Case Western Reserve</li><li>NYU</li><li>Wake Forest University</li><li>Brandeis University</li><li>Rochester Institute</li><li>University of Florida</li><li>University of Texas at Austin</li><li>Penn State University</li><li>University of Minnesota</li>
           </ol>
         </div>
         <div class="school-group likely">
           <h3>LIKELY / SAFETY — verify fit & admission odds</h3>
           <ol class="school-list" start="35">
-            <li>UC Santa Barbara</li><li>UC Santa Cruz</li><li>UC Riverside</li><li>Fordham University</li><li>American University</li><li>Pepperdine University</li><li>University of San Diego</li><li>Loyola Marymount University</li><li>Santa Clara University</li><li>University of Portland</li><li>Seattle University</li><li>Gonzaga University</li><li>University of Puget Sound</li><li>Reed College</li><li>University of Oregon</li><li>Oregon State University</li>
+            <li>UC Santa Barbara</li><li>UC Santa Cruz</li><li>UC Riverside</li><li>Fordham University</li><li>American University</li><li>Pepperdine University</li><li>University of San Diego</li><li>Loyola Marymount University</li><li>Santa Clara University</li><li>University of Denver</li><li>Arizona State University</li><li>University of Colorado at Boulder</li><li>University of Iowa</li><li>University of Kansas</li><li>University of Missouri</li><li>Oklahoma State University</li>
           </ol>
         </div>
       </div>
-      <p class="note">This is a planning shortlist, not a fixed ranking. Psychology strength, selectivity and program structure can vary by methodology and year; evaluate research opportunities, faculty advisors, location and overall fit.</p>
+      <p class="note">This is a planning shortlist, not a fixed ranking. Psychology strength, selectivity and program structure can vary by methodology and year; evaluate research opportunities, faculty expertise and overall fit for your goals.</p>
     </div>
   </section>
 
@@ -427,7 +427,7 @@
 
   <footer>
     <div><strong>YOU'VE GOT THIS.</strong> One step at a time. Stay focused and keep moving.</div>
-    <div class="sources">Planning information current as of <span id="currentDate">August 26, 2026</span>. Deadlines, testing policies, application platforms and requirements can change. Always verify on official university websites.</div>
+    <div class="sources">Planning information current as of <span id="currentDate">August 26, 2026</span>. Deadlines, testing policies, application platforms and requirements can change. Always verify on the official college website.</div>
     <div><strong>CLASS OF 2027 🎓</strong></div>
   </footer>
 </div>
