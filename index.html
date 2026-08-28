@@ -65,6 +65,7 @@
     .callout{margin-top:14px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#f9fbfe;font-size:11px;font-weight:800;text-align:center}
 
     .grid{display:grid;grid-template-columns:1.1fr 1.25fr 1.15fr 1fr;gap:14px;margin-top:16px}
+    .grid.two-column{grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
     .card{background:white;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
     .card h2{margin:0;padding:11px 14px;color:white;background:var(--navy);font-size:15px}
     .card.purple h2{background:var(--purple)} .card.blue h2{background:var(--blue)} .card.orange h2{background:var(--orange)}
@@ -102,7 +103,9 @@
       .wrap{padding:12px}
       header{grid-template-columns:1fr}
       .today{margin-left:0;text-align:right;justify-self:end}
-      .grid{grid-template-columns:1fr}.school-columns{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .grid.two-column{grid-template-columns:1fr}
+      .school-columns{grid-template-columns:1fr}
       /* On small screens allow months to stack vertically so the content remains legible */
       .months{flex-wrap:wrap}
       .month{flex:0 0 100%;border-right:0;min-height:auto}
@@ -391,7 +394,9 @@
         <p class="note">The sample table intentionally avoids hard-coding potentially stale school-by-school requirements. Use each university's official admissions page before submitting.</p>
       </div>
     </section>
+  </div>
 
+  <div class="grid two-column">
     <section class="card teal">
       <h2>📈 APPLICATION PROGRESS</h2>
       <div class="card-body">
