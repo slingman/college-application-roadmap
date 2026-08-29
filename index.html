@@ -14,7 +14,7 @@
       --purple:#6737a6; --purple-bg:#f5efff;
       --teal:#087f86; --teal-bg:#eafafa;
       --red:#c92727; --red-bg:#fff0f0;
-      --gold:#d99a00; --gold-bg:#fff9e5;
+      --gold:#d99a00;
       --line:#d7deea; --white:#fff; --shadow:0 8px 24px rgba(7,27,73,.08);
       --radius:16px;
     }
@@ -52,7 +52,6 @@
     .month.dec .month-head{background:var(--teal)}
     .month.may .month-head{background:var(--green)}
     .month-body{padding:12px 11px}
-    .month-body h3{font-size:12px;margin:0 0 9px;text-transform:uppercase;color:var(--muted)}
     .task{display:flex;gap:8px;margin:8px 0;font-size:12px}
     .task input{accent-color:var(--navy);margin-top:3px;flex:0 0 auto}
     .deadline{border:2px solid var(--red);background:var(--red-bg);border-radius:10px;padding:9px;margin:11px 0;font-size:11px;font-weight:900;color:#a21e1e}
@@ -62,6 +61,7 @@
     .tag.orange{color:#9c4500;background:var(--orange-bg)}
     .tag.purple{color:#4c287c;background:var(--purple-bg)}
     .tag.teal{color:#07656a;background:var(--teal-bg)}
+    .tag.red{color:#a21e1e;background:var(--red-bg)}
     .callout{margin-top:14px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#f9fbfe;font-size:11px;font-weight:800;text-align:center}
 
     .grid{display:grid;grid-template-columns:1.1fr 1.25fr 1.15fr 1fr;gap:14px;margin-top:16px}
@@ -85,9 +85,9 @@
     .platform strong{display:block;margin-bottom:3px}
     .platform.common{border-left:5px solid var(--green)} .platform.uc{border-left:5px solid var(--blue)}
     .platform.csu{border-left:5px solid var(--orange)} .platform.other{border-left:5px solid var(--purple)}
-    .deadlines table{width:100%;border-collapse:collapse;font-size:11px}
-    .deadlines td{border-bottom:1px solid var(--line);padding:7px 4px;vertical-align:top}
-    .deadlines td:first-child{font-weight:900;white-space:nowrap}
+    .data-table{width:100%;border-collapse:collapse;font-size:11px}
+    .data-table td,.data-table th{border-bottom:1px solid var(--line);padding:7px 4px;vertical-align:top;text-align:left}
+    .data-table td:first-child,.data-table th:first-child{font-weight:900;white-space:nowrap}
     .note{font-size:10px;color:var(--muted);margin-top:10px}
     .progress-wrap{display:flex;gap:10px;align-items:center;margin-bottom:10px}
     progress{width:100%;height:14px;accent-color:var(--green)}
@@ -98,6 +98,8 @@
     .sticky{position:sticky;top:0;z-index:10;background:rgba(244,247,251,.93);backdrop-filter:blur(8px);padding:8px 0}
     .nav{display:flex;gap:7px;overflow:auto}
     .nav a{white-space:nowrap;text-decoration:none;background:white;border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:11px;font-weight:850}
+    .table-scroll{overflow:auto}
+    #schools{margin-top:16px}
 
     /* Responsive adjustments: if the viewport gets very narrow, allow months to stack to preserve readability */
     @media(max-width:720px){
@@ -281,10 +283,10 @@
   </section>
 
   <div class="grid">
-    <section class="card deadlines" id="deadlines">
+    <section class="card" id="deadlines">
       <h2>📅 KEY DEADLINES AT A GLANCE</h2>
       <div class="card-body">
-        <table>
+        <table class="data-table">
           <tr><td>Aug 1, 2026</td><td>Common App and UC applications open for the 2026–27 cycle.</td></tr>
           <tr><td>Oct 1, 2026</td><td>FAFSA is expected to open; check official FAFSA/college guidance. California Dream Act and CSS Profile timing should also be verified.</td></tr>
           <tr><td>Nov 1, 2026</td><td>Many Early Action / Early Decision deadlines. School-specific scholarship deadlines may also fall here.</td></tr>
@@ -349,7 +351,7 @@
     </section>
   </div>
 
-  <section class="card" id="schools" style="margin-top:16px">
+  <section class="card" id="schools">
     <h2>🏫 TOP 50 PSYCHOLOGY PROGRAMS TO CONSIDER</h2>
     <div class="card-body">
       <div class="school-columns">
@@ -379,9 +381,9 @@
   <div class="grid full-width">
     <section class="card">
       <h2>🔎 SAMPLE APPLICATION QUICK REFERENCE</h2>
-      <div class="card-body" style="overflow:auto">
-        <table class="deadlines">
-          <thead><tr><td>School</td><td>Platform</td><td>Essays</td><td>Recommendations</td><td>Interview</td><td>Typical RD</td></tr></thead>
+      <div class="card-body table-scroll">
+        <table class="data-table">
+          <thead><tr><th>School</th><th>Platform</th><th>Essays</th><th>Recommendations</th><th>Interview</th><th>Typical RD</th></tr></thead>
           <tbody>
             <tr><td>Stanford</td><td>Common App</td><td>Personal + supplements</td><td>School-specific</td><td>May be offered</td><td>Verify current cycle</td></tr>
             <tr><td>UCLA</td><td>UC App</td><td>4 PIQs</td><td>No routine letters</td><td>No routine interview</td><td>Nov 30 UC deadline</td></tr>
@@ -402,7 +404,7 @@
     <section class="card teal">
       <h2>📈 APPLICATION PROGRESS</h2>
       <div class="card-body">
-        <div class="progress-wrap"><progress id="progress" value="12" max="100"></progress><span class="progress-num" id="progressNum">12%</span></div>
+        <div class="progress-wrap"><progress id="progress" value="0" max="100"></progress><span class="progress-num" id="progressNum">0%</span></div>
         <label class="check"><input type="checkbox" data-progress>College list</label>
         <label class="check"><input type="checkbox" data-progress>Common App account</label>
         <label class="check"><input type="checkbox" data-progress>UC account</label>
