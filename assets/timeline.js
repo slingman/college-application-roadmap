@@ -22,6 +22,8 @@ updateProgress();
 // School interest picker: check schools from the reference list and/or type
 // in your own, persisted locally, rendered into the "Additional Interests" list.
 const CUSTOM_SCHOOLS_KEY = 'college-roadmap-custom-schools';
+// Already shown in their own group above — don't duplicate them in Additional Interests.
+const ALREADY_LISTED = ['UC Berkeley', 'UCLA', 'UC San Diego', 'UC Davis'];
 const schoolChecks = [...document.querySelectorAll('.school-check')];
 const selectedList = document.getElementById('selectedSchoolsList');
 const customInput = document.getElementById('customSchoolInput');
@@ -44,7 +46,9 @@ function saveCustomSchools(list){
 function renderSelectedSchools(){
   if(!selectedList) return;
   selectedList.innerHTML = '';
-  const checked = schoolChecks.filter(b => b.checked).map(b => ({ name: b.dataset.school, type: 'checked' }));
+  const checked = schoolChecks
+    .filter(b => b.checked && !ALREADY_LISTED.includes(b.dataset.school))
+    .map(b => ({ name: b.dataset.school, type: 'checked' }));
   const custom = loadCustomSchools().map(name => ({ name, type: 'custom' }));
   const all = [...checked, ...custom];
 
