@@ -259,8 +259,16 @@
             <li>Northeastern University</li>
           </ol>
         </div>
+        <div class="school-group other">
+          <h3>ADDITIONAL INTERESTS</h3>
+          <ol class="school-list" id="selectedSchoolsList"></ol>
+          <div class="add-school">
+            <input type="text" id="customSchoolInput" placeholder="Add another school…" aria-label="Add another school">
+            <button type="button" id="addSchoolBtn">Add</button>
+          </div>
+        </div>
       </div>
-      <p class="note">Not final — more schools may be added as she decides. The list below is there to help fill it out.</p>
+      <p class="note">Not final — check schools below or add your own above as she decides.</p>
     </div>
   </section>
 
@@ -271,19 +279,66 @@
         <div class="school-group reach">
           <h3>REACH — highly selective</h3>
           <ol class="school-list">
-            <li>Stanford University</li><li>UC Berkeley</li><li>UCLA</li><li>Harvard University</li><li>Yale University</li><li>Princeton University</li><li>University of Michigan–Ann Arbor</li><li>Northwestern University</li><li>Duke University</li><li>University of Pennsylvania</li><li>Johns Hopkins University</li><li>Columbia University</li><li>Cornell University</li><li>Brown University</li><li>Vanderbilt University</li><li>Washington University in St. Louis</li><li>Carnegie Mellon University</li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Stanford University"> Stanford University</label></li>
+            <li>UC Berkeley <span class="confirmed-tag">✓ on her list</span></li>
+            <li>UCLA <span class="confirmed-tag">✓ on her list</span></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Harvard University"> Harvard University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Yale University"> Yale University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Princeton University"> Princeton University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="University of Michigan–Ann Arbor"> University of Michigan–Ann Arbor</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Northwestern University"> Northwestern University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Duke University"> Duke University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="University of Pennsylvania"> University of Pennsylvania</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Johns Hopkins University"> Johns Hopkins University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Columbia University"> Columbia University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Cornell University"> Cornell University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Brown University"> Brown University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Vanderbilt University"> Vanderbilt University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Washington University in St. Louis"> Washington University in St. Louis</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Carnegie Mellon University"> Carnegie Mellon University</label></li>
           </ol>
         </div>
         <div class="school-group target">
           <h3>TARGET — competitive</h3>
           <ol class="school-list" start="18">
-            <li>UC San Diego</li><li>USC</li><li>Emory University</li><li>Boston University</li><li>Tufts University</li><li>UC Davis</li><li>University of Illinois Urbana-Champaign</li><li>University of Wisconsin–Madison</li><li>Case Western Reserve</li><li>NYU</li><li>Wake Forest University</li><li>Brandeis University</li><li>Rochester Institute</li><li>University of Florida</li><li>University of Texas at Austin</li><li>Penn State University</li><li>University of Minnesota</li>
+            <li>UC San Diego <span class="confirmed-tag">✓ on her list</span></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="USC"> USC</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Emory University"> Emory University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Boston University"> Boston University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Tufts University"> Tufts University</label></li>
+            <li>UC Davis <span class="confirmed-tag">✓ on her list</span></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="University of Illinois Urbana-Champaign"> University of Illinois Urbana-Champaign</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="University of Wisconsin–Madison"> University of Wisconsin–Madison</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Case Western Reserve"> Case Western Reserve</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="NYU"> NYU</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Wake Forest University"> Wake Forest University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Brandeis University"> Brandeis University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Rochester Institute"> Rochester Institute</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="University of Florida"> University of Florida</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="University of Texas at Austin"> University of Texas at Austin</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Penn State University"> Penn State University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="University of Minnesota"> University of Minnesota</label></li>
           </ol>
         </div>
         <div class="school-group likely">
           <h3>LIKELY / SAFETY — verify fit & admission odds</h3>
           <ol class="school-list" start="35">
-            <li>UC Santa Barbara</li><li>UC Santa Cruz</li><li>UC Riverside</li><li>Fordham University</li><li>American University</li><li>Pepperdine University</li><li>University of San Diego</li><li>Loyola Marymount University</li><li>Santa Clara University</li><li>University of Denver</li><li>Arizona State University</li><li>University of Colorado at Boulder</li><li>University of Iowa</li><li>University of Kansas</li><li>University of Missouri</li><li>Oklahoma State University</li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="UC Santa Barbara"> UC Santa Barbara</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="UC Santa Cruz"> UC Santa Cruz</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="UC Riverside"> UC Riverside</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Fordham University"> Fordham University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="American University"> American University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Pepperdine University"> Pepperdine University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="University of San Diego"> University of San Diego</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Loyola Marymount University"> Loyola Marymount University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Santa Clara University"> Santa Clara University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="University of Denver"> University of Denver</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Arizona State University"> Arizona State University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="University of Colorado at Boulder"> University of Colorado at Boulder</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="University of Iowa"> University of Iowa</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="University of Kansas"> University of Kansas</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="University of Missouri"> University of Missouri</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Oklahoma State University"> Oklahoma State University</label></li>
           </ol>
         </div>
       </div>

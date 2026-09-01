@@ -75,6 +75,17 @@ h1{font-size:clamp(28px,4vw,52px);line-height:1;margin:0 0 8px;letter-spacing:-1
 .school-group.uc{border-left:5px solid var(--blue)}.school-group.uc h3{color:#0d4e93}
 .school-group.csu{border-left:5px solid var(--orange)}.school-group.csu h3{color:#9c4500}
 .school-group.private{border-left:5px solid var(--purple)}.school-group.private h3{color:#4c287c}
+.school-group.other{border-left:5px solid var(--muted)}.school-group.other h3{color:var(--muted)}
+#mylist .school-group.other{grid-column:1 / -1}
+.school-pick{display:flex;align-items:center;gap:6px;cursor:pointer}
+.school-pick input{accent-color:var(--navy);flex:0 0 auto}
+.confirmed-tag{color:var(--green);font-weight:700;font-size:10px;margin-left:4px}
+.add-school{display:flex;gap:6px;margin-top:10px}
+.add-school input{flex:1;min-width:0;padding:6px 8px;border:1px solid var(--line);border-radius:8px;font-size:12px;font-family:inherit}
+.add-school button{border:none;background:var(--navy);color:#fff;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:800;cursor:pointer}
+.selected-item{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.remove-school{border:none;background:none;color:var(--red);cursor:pointer;font-size:16px;font-weight:900;line-height:1;padding:0 2px}
+.empty-note{color:var(--muted);font-size:11px;list-style:none;margin-left:-20px}
 ol.school-list{margin:0;padding-left:20px;font-size:11px}
 ol.school-list li{padding:2px 0}
 .platform{border:1px solid var(--line);border-radius:11px;padding:11px;margin:8px 0}
