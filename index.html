@@ -26,7 +26,7 @@
 
   <div class="sticky">
     <nav class="nav">
-      <a href="#timeline">Timeline</a><a href="#mylist">Her List</a><a href="#schools">More Schools</a><a href="#platforms">Application Platforms</a>
+      <a href="#timeline">Timeline</a><a href="#mylist">Her List</a><a href="#schools">Programs to Consider</a><a href="#platforms">Application Platforms</a>
       <a href="#deadlines">Deadlines</a><a href="#aid">Financial Aid</a><a href="#psych">Psychology Prep</a>
     </nav>
   </div>
@@ -234,46 +234,19 @@
   </div>
 
   <section class="card" id="mylist">
-    <h2>🎯 HER COLLEGE LIST (IN PROGRESS)</h2>
+    <h2>🎯 HER COLLEGE LIST</h2>
     <div class="card-body">
-      <div class="school-columns">
-        <div class="school-group uc">
-          <h3>UNIVERSITY OF CALIFORNIA</h3>
-          <ol class="school-list">
-            <li>UC Berkeley</li>
-            <li>UCLA</li>
-            <li>UC San Diego</li>
-            <li>UC Davis</li>
-          </ol>
-        </div>
-        <div class="school-group csu">
-          <h3>CALIFORNIA STATE UNIVERSITY</h3>
-          <ol class="school-list">
-            <li>San Diego State University</li>
-            <li>Cal State Long Beach</li>
-          </ol>
-        </div>
-        <div class="school-group private">
-          <h3>PRIVATE / OTHER</h3>
-          <ol class="school-list">
-            <li>Northeastern University</li>
-          </ol>
-        </div>
-        <div class="school-group other">
-          <h3>ADDITIONAL INTERESTS</h3>
-          <ol class="school-list" id="selectedSchoolsList"></ol>
-          <div class="add-school">
-            <input type="text" id="customSchoolInput" placeholder="Add another school…" aria-label="Add another school">
-            <button type="button" id="addSchoolBtn">Add</button>
-          </div>
-        </div>
+      <ol class="school-list" id="selectedSchoolsList"></ol>
+      <div class="add-school">
+        <input type="text" id="customSchoolInput" placeholder="Add another school…" aria-label="Add another school">
+        <button type="button" id="addSchoolBtn">Add</button>
       </div>
-      <p class="note">Not final — check schools below or add your own above as she decides.</p>
+      <p class="note">Check schools below, or add your own above — this list updates automatically.</p>
     </div>
   </section>
 
   <section class="card" id="schools">
-    <h2>🏫 MORE PSYCHOLOGY PROGRAMS TO CONSIDER</h2>
+    <h2>🏫 PSYCHOLOGY PROGRAMS TO CONSIDER</h2>
     <div class="card-body">
       <div class="school-columns">
         <div class="school-group reach">
@@ -341,8 +314,16 @@
             <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Oklahoma State University"> Oklahoma State University</label></li>
           </ol>
         </div>
+        <div class="school-group other">
+          <h3>CSU &amp; OTHER</h3>
+          <ol class="school-list">
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="San Diego State University" checked> San Diego State University</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Cal State Long Beach" checked> Cal State Long Beach</label></li>
+            <li><label class="school-pick"><input type="checkbox" class="school-check" data-school="Northeastern University" checked> Northeastern University</label></li>
+          </ol>
+        </div>
       </div>
-      <p class="note">This is a planning shortlist, not a fixed ranking. Psychology strength, selectivity and program structure can vary by methodology and year; evaluate research opportunities, faculty expertise and overall fit for your goals.</p>
+      <p class="note">This is a planning shortlist, not a fixed ranking. Psychology strength, selectivity and program structure can vary by methodology and year; evaluate research opportunities, faculty expertise and overall fit for your goals. Checked boxes are on her current list — check more, or add your own above, as she decides.</p>
     </div>
   </section>
 
