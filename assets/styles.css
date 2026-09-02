@@ -87,6 +87,18 @@ h1{font-size:clamp(28px,4vw,52px);line-height:1;margin:0 0 8px;letter-spacing:-1
 .empty-note{color:var(--muted);font-size:11px;list-style:none;margin-left:-20px}
 ol.school-list{margin:0;padding-left:20px;font-size:11px}
 ol.school-list li{padding:2px 0}
+ol.status-list{margin:0;padding-left:20px}
+.status-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 0;border-bottom:1px solid var(--line);font-size:11px}
+.status-row:last-child{border-bottom:0}
+.status-school{flex:1 1 150px;font-weight:800}
+.status-date{border:1px solid var(--line);border-radius:8px;padding:5px 7px;font-size:11px;font-family:inherit}
+.status-select{border:1px solid var(--line);border-radius:8px;padding:5px 7px;font-size:11px;font-family:inherit;font-weight:700;cursor:pointer}
+.status-select.status-not-started{color:var(--muted)}
+.status-select.status-in-progress{color:var(--blue)}
+.status-select.status-submitted{color:var(--green)}
+.status-select.status-decided{color:var(--purple)}
+.status-days{flex:0 0 auto;font-weight:800;color:var(--muted);min-width:80px;text-align:right}
+.status-days.urgent{color:var(--red)}
 .platform{border:1px solid var(--line);border-radius:11px;padding:11px;margin:8px 0}
 .platform strong{display:block;margin-bottom:3px}
 .platform.common{border-left:5px solid var(--green)} .platform.uc{border-left:5px solid var(--blue)}
