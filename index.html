@@ -242,6 +242,10 @@
         <button type="button" id="addSchoolBtn">Add</button>
       </div>
       <p class="note">Check schools below, or add your own above, and Lotus's list updates automatically.</p>
+      <div class="submit-row">
+        <button type="button" id="updateQuickRefBtn">Update Quick Reference ↓</button>
+        <span class="small">Refreshes the Sample Application Quick Reference below with her current list.</span>
+      </div>
     </div>
   </section>
 
@@ -342,17 +346,9 @@
       <div class="card-body table-scroll">
         <table class="data-table">
           <thead><tr><th>School</th><th>Platform</th><th>Essays</th><th>Recommendations</th><th>Interview</th><th>Typical RD</th></tr></thead>
-          <tbody>
-            <tr><td>UC Berkeley</td><td>UC App</td><td>4 PIQs</td><td>No routine letters</td><td>No routine interview</td><td>Nov 30 UC deadline</td></tr>
-            <tr><td>UCLA</td><td>UC App</td><td>4 PIQs</td><td>No routine letters</td><td>No routine interview</td><td>Nov 30 UC deadline</td></tr>
-            <tr><td>UC San Diego</td><td>UC App</td><td>4 PIQs</td><td>No routine letters</td><td>No routine interview</td><td>Nov 30 UC deadline</td></tr>
-            <tr><td>UC Irvine</td><td>UC App</td><td>4 PIQs</td><td>No routine letters</td><td>No routine interview</td><td>Nov 30 UC deadline</td></tr>
-            <tr><td>Northwestern</td><td>Common App / Coalition</td><td>Personal statement optional; 1 required short answer</td><td>1 teacher + 1 counselor letter</td><td>Optional (Glimpse video)</td><td>Jan 2, 2027</td></tr>
-            <tr><td>San Diego State</td><td>Cal State Apply</td><td>No essay for general admission</td><td>Not required</td><td>Not offered</td><td>Nov 30 CSU deadline</td></tr>
-            <tr><td>Cal State Long Beach</td><td>Cal State Apply</td><td>No essay for general admission</td><td>Not required</td><td>Not offered</td><td>Nov 30 CSU deadline</td></tr>
-          </tbody>
+          <tbody id="quickRefBody"></tbody>
         </table>
-        <p class="note">Reflects Lotus's current list. Confirm each item on the school's official admissions page before submitting — requirements can change year to year.</p>
+        <p class="note">Reflects Lotus's list as of her last update below — confirm each item on the school's official admissions page before submitting, since requirements can change year to year.</p>
       </div>
     </section>
   </div>

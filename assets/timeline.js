@@ -34,6 +34,19 @@ const KNOWN_DEADLINES = {
   'Cal State Long Beach': '2026-11-30',
   'Northwestern University': '2027-01-02',
 };
+// Verified application requirements for the same confirmed schools, shown in
+// the Sample Application Quick Reference table. Any school without an entry
+// here falls back to "Verify current cycle" rather than guessing.
+const SCHOOL_INFO = {
+  'UC Berkeley': { platform: 'UC App', essays: '4 PIQs', recommendations: 'No routine letters', interview: 'No routine interview', rd: 'Nov 30 UC deadline' },
+  'UCLA': { platform: 'UC App', essays: '4 PIQs', recommendations: 'No routine letters', interview: 'No routine interview', rd: 'Nov 30 UC deadline' },
+  'UC San Diego': { platform: 'UC App', essays: '4 PIQs', recommendations: 'No routine letters', interview: 'No routine interview', rd: 'Nov 30 UC deadline' },
+  'UC Irvine': { platform: 'UC App', essays: '4 PIQs', recommendations: 'No routine letters', interview: 'No routine interview', rd: 'Nov 30 UC deadline' },
+  'Northwestern University': { platform: 'Common App / Coalition', essays: 'Personal statement optional; 1 required short answer', recommendations: '1 teacher + 1 counselor letter', interview: 'Optional (Glimpse video)', rd: 'Jan 2, 2027' },
+  'San Diego State University': { platform: 'Cal State Apply', essays: 'No essay for general admission', recommendations: 'Not required', interview: 'Not offered', rd: 'Nov 30 CSU deadline' },
+  'Cal State Long Beach': { platform: 'Cal State Apply', essays: 'No essay for general admission', recommendations: 'Not required', interview: 'Not offered', rd: 'Nov 30 CSU deadline' },
+};
+const UNVERIFIED_INFO = { platform: 'Verify current cycle', essays: 'Verify current cycle', recommendations: 'Verify current cycle', interview: 'Verify current cycle', rd: 'Verify current cycle' };
 const schoolChecks = [...document.querySelectorAll('.school-check')];
 const selectedList = document.getElementById('selectedSchoolsList');
 const customInput = document.getElementById('customSchoolInput');
@@ -202,6 +215,55 @@ function refreshSchoolViews(){
   renderStatusTimeline();
 }
 
+// Sample Application Quick Reference: unlike the list and status timeline
+// above, this does NOT update live as boxes are checked — it only refreshes
+// when she clicks "Update Quick Reference", so it reflects a deliberate
+// snapshot of her list rather than changing on every click.
+const QUICK_REF_KEY = 'college-roadmap-quickref-schools';
+const quickRefBody = document.getElementById('quickRefBody');
+const updateQuickRefBtn = document.getElementById('updateQuickRefBtn');
+
+function loadQuickRefSchools(){
+  try {
+    const raw = localStorage.getItem(QUICK_REF_KEY);
+    if(raw !== null) return JSON.parse(raw);
+  } catch(e){ /* fall through to default below */ }
+  return getSelectedSchools().map(s => s.name);
+}
+
+function renderQuickReference(names){
+  if(!quickRefBody) return;
+  quickRefBody.innerHTML = '';
+
+  if(names.length === 0){
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = 6;
+    td.className = 'empty-note';
+    td.textContent = 'Nothing on her list yet — check schools above, then click Update Quick Reference.';
+    tr.appendChild(td);
+    quickRefBody.appendChild(tr);
+    return;
+  }
+
+  names.forEach(name => {
+    const info = SCHOOL_INFO[name] || UNVERIFIED_INFO;
+    const tr = document.createElement('tr');
+    [name, info.platform, info.essays, info.recommendations, info.interview, info.rd].forEach(text => {
+      const td = document.createElement('td');
+      td.textContent = text;
+      tr.appendChild(td);
+    });
+    quickRefBody.appendChild(tr);
+  });
+}
+
+if(updateQuickRefBtn) updateQuickRefBtn.addEventListener('click', () => {
+  const names = getSelectedSchools().map(s => s.name);
+  localStorage.setItem(QUICK_REF_KEY, JSON.stringify(names));
+  renderQuickReference(names);
+});
+
 schoolChecks.forEach(box => {
   const key = schoolKey(box.dataset.school);
   const saved = localStorage.getItem(key);
@@ -236,6 +298,7 @@ if(customInput) customInput.addEventListener('keydown', (e) => {
 });
 
 refreshSchoolViews();
+renderQuickReference(loadQuickRefSchools());
 
 // Set today's date dynamically in two places: the header and the footer
 (function setTodayDates(){
