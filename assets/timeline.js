@@ -42,6 +42,58 @@ const UC_INFO = { platform: 'UC App', essays: '4 PIQs', recommendations: 'No rou
 const CSU_DEADLINE = '2026-11-30';
 const CSU_INFO = { platform: 'Cal State Apply', essays: 'No essay for general admission', recommendations: 'Not required', interview: 'Not offered', rd: 'Nov 30 CSU deadline' };
 
+// Verified data for every other school in the "Psychology Programs to
+// Consider" reference list (researched from official admissions pages,
+// cross-checked against secondary sources; see commit message for the
+// research pass this came from). `deadline` is null for schools with no
+// fixed RD deadline (rolling admission, no confirmed date) — the status
+// timeline correctly shows "No deadline set" for those rather than a
+// fabricated date; `rd` still explains why in the Quick Reference table.
+const REFERENCE_SCHOOLS = {
+  'Stanford University': { deadline: '2027-01-05', platform: 'Common App', essays: 'Personal statement + 8 short items (5 short answers, 3 short essays)', recommendations: '2 teacher + 1 counselor letter', interview: 'Optional (alumni, where available)', rd: 'Jan 5 (REA: Nov 1)' },
+  'Harvard University': { deadline: '2027-01-01', platform: 'Common App / Coalition / QuestBridge', essays: 'Personal statement + 5 required short answers (~150w each)', recommendations: '2 teacher + 1 counselor letter', interview: 'Optional (alumni, where available)', rd: 'Jan 1, 2027' },
+  'Yale University': { deadline: '2027-01-02', platform: 'Common App / Coalition / QuestBridge', essays: 'Personal statement + short-answer supplement', recommendations: '2 teacher + 1 counselor letter', interview: 'Optional (alumni, where available)', rd: 'Jan 2 (SCEA: Nov 1)' },
+  'Princeton University': { deadline: '2027-01-01', platform: 'Common App + Princeton Supplement', essays: 'Personal statement + ~250w essay + 3 short (~50w) essays', recommendations: '2 teacher + 1 counselor letter + 1 graded paper', interview: 'Optional (alumni, where available)', rd: 'Jan 1 (arts supplement Jan 8)' },
+  'University of Michigan–Ann Arbor': { deadline: '2027-02-01', platform: 'Common App / Coalition', essays: 'Personal statement + 2 required supplements', recommendations: '1 counselor + 1 additional letter', interview: 'Not offered', rd: 'Feb 1, 2027 (EA: Nov 1)' },
+  'Duke University': { deadline: '2027-01-05', platform: 'Common App / Coalition / QuestBridge', essays: 'Personal statement + 2 required 250w essays + 1 optional', recommendations: '1 counselor + 2 teacher letters', interview: 'Optional (alumni; Glimpse/InitialView video)', rd: '~Jan 5 (unconfirmed for 2026-27)' },
+  'University of Pennsylvania': { deadline: '2027-01-05', platform: 'Common App / Coalition / QuestBridge', essays: 'Personal statement + 3 required short essays', recommendations: '1 counselor + 1 teacher letter', interview: 'Not offered', rd: 'Jan 5, 2027' },
+  'Johns Hopkins University': { deadline: null, platform: 'Common App / Coalition', essays: 'Personal statement + 1 required supplement (200-350w)', recommendations: '2 teacher + 1 counselor letter', interview: 'Not offered', rd: '~Early Jan (unconfirmed for 2026-27)' },
+  'Columbia University': { deadline: '2027-01-01', platform: 'Common App / QuestBridge', essays: 'Personal statement + supplement (6 short items)', recommendations: '2 teacher + 1 counselor letter', interview: 'Not offered', rd: 'Jan 1, 2027 (ED: Nov 1)' },
+  'Cornell University': { deadline: '2027-01-02', platform: 'Common App / QuestBridge', essays: 'Personal statement + college-specific supplement (varies)', recommendations: '2 teacher + 1 counselor letter', interview: 'Not offered', rd: 'Jan 2, 2027' },
+  'Brown University': { deadline: '2027-01-05', platform: 'Common App / QuestBridge', essays: 'Personal statement + supplement (4 short essays)', recommendations: '2 teacher + 1 counselor letter', interview: 'Not offered (optional video intro)', rd: '~Jan 5 (SlideRoom items Jan 7)' },
+  'Vanderbilt University': { deadline: '2027-01-01', platform: 'Common App / Coalition / QuestBridge', essays: 'Personal statement + 1 required ~400w essay', recommendations: '2 teacher + 1 counselor letter', interview: 'Optional (InitialView/Glimpse video)', rd: 'Jan 1, 2027' },
+  'Washington University in St. Louis': { deadline: '2027-01-04', platform: 'Common App / Coalition / QuestBridge', essays: 'Personal statement + 1 required ~250w supplement', recommendations: '1 counselor + 1 teacher evaluation', interview: 'Not offered (general admission)', rd: 'Jan 4, 2027' },
+  'Carnegie Mellon University': { deadline: '2027-01-04', platform: 'Common App / QuestBridge', essays: 'Personal statement + 3 required ~300w supplements', recommendations: '2 teacher (1 math/science) + 1 counselor letter', interview: 'Not offered (optional on request)', rd: 'Jan 4, 2027' },
+  'USC': { deadline: '2027-01-10', platform: 'Common App / QuestBridge', essays: 'Personal statement + 2 required essays + short answers', recommendations: '1 letter (counselor or teacher)', interview: 'Not offered', rd: 'Jan 10, 2027 (EA/ED: Nov 1)' },
+  'Emory University': { deadline: '2027-01-01', platform: 'Common App / QuestBridge', essays: 'Personal statement + 2 required supplements', recommendations: '1 counselor + 2 teacher letters', interview: 'Not offered (optional alumni feedback)', rd: 'Jan 1' },
+  'Boston University': { deadline: '2027-01-05', platform: 'Common App', essays: 'Personal statement + 1 required supplement', recommendations: '1 teacher + 1 counselor letter', interview: 'Optional (invitation-only)', rd: 'Jan 5' },
+  'Tufts University': { deadline: '2027-01-04', platform: 'Common App / Coalition / QuestBridge', essays: 'Personal statement + 2 required essays', recommendations: '1 teacher + 1 counselor letter', interview: 'Optional (alumni, on request)', rd: 'Jan 4, 2027' },
+  'University of Illinois Urbana-Champaign': { deadline: '2026-11-01', platform: 'myIllini / Common App / Coalition', essays: '2 required short essays (~150w each)', recommendations: 'Not required', interview: 'Not offered', rd: 'Priority Nov 1 (rolling after)' },
+  'University of Wisconsin–Madison': { deadline: '2027-02-01', platform: 'Common App / UW System App', essays: '1 required supplement (80-650w)', recommendations: '1 letter required', interview: 'Not offered', rd: 'Feb 1, 2027' },
+  'Case Western Reserve': { deadline: '2027-01-15', platform: 'Common App / Coalition', essays: 'Personal statement only — no general supplement', recommendations: '2 teacher + 1 counselor letter', interview: 'Optional (not required)', rd: 'Jan 15, 2027' },
+  'NYU': { deadline: '2027-01-05', platform: 'Common App / Coalition / QuestBridge', essays: 'Personal statement + 1 optional supplement', recommendations: '1 letter (teacher, counselor, or other)', interview: 'Not offered', rd: 'Jan 5, 2027' },
+  'Wake Forest University': { deadline: '2027-01-01', platform: 'Common App', essays: '1 required ≤150w essay + several optional items', recommendations: '1 teacher or counselor letter', interview: 'Optional (non-evaluative)', rd: 'Jan 1' },
+  'Brandeis University': { deadline: '2027-01-01', platform: 'Common App', essays: 'Personal statement only (domestic applicants)', recommendations: '1 teacher letter + counselor report', interview: 'By invitation only', rd: 'Jan 1 (materials due Jan 15)' },
+  'Rochester Institute': { deadline: '2027-01-15', platform: 'Common App / RIT App', essays: 'Personal statement — no general supplement', recommendations: '1 letter (counselor preferred)', interview: 'Optional (Hometown Interviews)', rd: '~Jan 15 (rolling; unconfirmed)' },
+  'University of Florida': { deadline: '2027-01-15', platform: 'Common App', essays: 'Personal statement required', recommendations: 'Not considered — do not submit', interview: 'Not offered', rd: 'Jan 15, 2027' },
+  'University of Texas at Austin': { deadline: '2026-12-01', platform: 'ApplyTexas / Common App', essays: '650w essay + 1 major-specific short answer', recommendations: 'Optional', interview: 'Not offered', rd: 'Dec 1, 2026' },
+  'Penn State University': { deadline: '2026-11-30', platform: 'MyPennState / Common App', essays: 'No essay required (1 optional supplement)', recommendations: 'Not required', interview: 'Not offered', rd: 'Priority Nov 30 (rolling after)' },
+  'University of Minnesota': { deadline: '2027-01-01', platform: 'Common App / MyU', essays: '2 required short prompts (~150w each)', recommendations: 'Not required', interview: 'Not offered', rd: 'Jan 1, 2027 (EA: Nov 1)' },
+  'Fordham University': { deadline: '2027-01-03', platform: 'Common App', essays: 'Personal statement + 1 optional ~300w supplement', recommendations: '1 teacher + 1 counselor letter (likely required)', interview: 'Not offered', rd: '~Jan 3' },
+  'American University': { deadline: '2027-01-20', platform: 'Common App', essays: 'Personal statement + 1 optional ~250w supplement', recommendations: '1 teacher letter', interview: 'Optional (informational, not evaluative)', rd: '~Jan 20' },
+  'Pepperdine University': { deadline: '2027-01-15', platform: 'Common App', essays: 'Personal statement + 1 required supplement (300-500w)', recommendations: '1 academic letter required', interview: 'Optional (evaluative)', rd: '~Jan 15' },
+  'University of San Diego': { deadline: '2027-01-15', platform: 'Common App', essays: 'Personal statement + 2 required supplements (~350w each)', recommendations: '1 letter required', interview: 'Not offered', rd: '~Jan 15' },
+  'Loyola Marymount University': { deadline: '2027-01-15', platform: 'Common App / LMU App', essays: 'Personal statement + 1 supplement (500w, technically optional)', recommendations: '1 letter required', interview: 'Not offered', rd: 'Jan 15' },
+  'Santa Clara University': { deadline: '2027-01-07', platform: 'Common App', essays: 'Personal statement + 1 required ~50w question + 1 optional supplement', recommendations: '1+ teacher letter required', interview: 'Not offered (domestic)', rd: '~Jan 7' },
+  'University of Denver': { deadline: '2027-01-15', platform: 'Common App', essays: 'Personal statement only — no required supplement', recommendations: '1 counselor letter required', interview: 'Not offered', rd: '~Jan 15' },
+  'Arizona State University': { deadline: '2026-11-01', platform: 'Common App / ASU App', essays: 'Not required', recommendations: 'Not required', interview: 'Not offered', rd: 'Priority Nov 1 (rolling)' },
+  'University of Colorado at Boulder': { deadline: '2027-01-15', platform: 'Common App', essays: 'Personal statement + 1 required ~250w CU question', recommendations: '1 letter required', interview: 'Not offered', rd: 'Jan 15, 2027' },
+  'University of Iowa': { deadline: null, platform: 'Common App / Iowa App', essays: 'Not required', recommendations: 'Not required', interview: 'Not offered', rd: 'Rolling — no fixed deadline' },
+  'University of Kansas': { deadline: '2026-12-01', platform: 'Common App / KU App', essays: 'Not required', recommendations: 'Not required', interview: 'Not offered', rd: 'Rolling — priority Dec 1 for scholarships' },
+  'University of Missouri': { deadline: '2026-12-01', platform: 'Common App / Mizzou App', essays: 'Required if via Common App; else 3 short essays', recommendations: 'Not required', interview: 'Not offered', rd: 'Rolling — priority Dec 1 for scholarships' },
+  'Oklahoma State University': { deadline: null, platform: 'Common App / OSU App', essays: 'Not required (recommended for scholarships)', recommendations: 'Not clearly required', interview: 'Not offered', rd: 'Rolling — no fixed deadline' },
+};
+
 // Verified deadlines for her confirmed/reference schools. Anything else she
 // adds starts with no deadline — she fills it in herself in the status
 // timeline below.
@@ -49,6 +101,7 @@ const KNOWN_DEADLINES = {
   ...Object.fromEntries(UC_SCHOOLS.map(name => [name, UC_DEADLINE])),
   ...Object.fromEntries(CSU_SCHOOLS.map(name => [name, CSU_DEADLINE])),
   'Northwestern University': '2027-01-02',
+  ...Object.fromEntries(Object.entries(REFERENCE_SCHOOLS).filter(([, s]) => s.deadline).map(([name, s]) => [name, s.deadline])),
 };
 // Verified application requirements for the same schools, shown in the
 // Sample Application Quick Reference table. Any school without an entry
@@ -57,6 +110,7 @@ const SCHOOL_INFO = {
   ...Object.fromEntries(UC_SCHOOLS.map(name => [name, UC_INFO])),
   ...Object.fromEntries(CSU_SCHOOLS.map(name => [name, CSU_INFO])),
   'Northwestern University': { platform: 'Common App / Coalition', essays: 'Personal statement optional; 1 required short answer', recommendations: '1 teacher + 1 counselor letter', interview: 'Optional (Glimpse video)', rd: 'Jan 2, 2027' },
+  ...Object.fromEntries(Object.entries(REFERENCE_SCHOOLS).map(([name, s]) => [name, s])),
 };
 const UNVERIFIED_INFO = { platform: 'Verify current cycle', essays: 'Verify current cycle', recommendations: 'Verify current cycle', interview: 'Verify current cycle', rd: 'Verify current cycle' };
 const schoolChecks = [...document.querySelectorAll('.school-check')];
