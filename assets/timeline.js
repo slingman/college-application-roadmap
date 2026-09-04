@@ -22,35 +22,41 @@ updateProgress();
 // School interest picker: check schools from the reference list and/or type
 // in your own, persisted locally, rendered into "Her College List".
 const CUSTOM_SCHOOLS_KEY = 'college-roadmap-custom-schools';
-// Verified deadlines for her confirmed schools (see the Sample Application
-// Quick Reference table). Anything else she adds starts with no deadline —
-// she fills it in herself in the status timeline below.
+// UC and CSU admission requirements and deadlines are set system-wide, not
+// per campus (verified: all 9 UC campuses share one deadline and neither UC
+// nor CSU requires essays/recommendations/interviews for general admission).
+// So every UC and CSU campus that appears anywhere on the page — not just
+// her confirmed ones — gets the same shared info below, rather than only
+// whichever campuses happened to be manually listed (a UC or CSU school
+// present as a checkbox but missing here was exactly the bug that prompted
+// this refactor).
+const UC_SCHOOLS = [...document.querySelectorAll('.school-check')]
+  .map(b => b.dataset.school)
+  .filter(name => name === 'UCLA' || name.startsWith('UC '));
+const CSU_SCHOOLS = [...document.querySelectorAll('.school-check')]
+  .map(b => b.dataset.school)
+  .filter(name => /^(San Diego State University|Cal State |CSU )/.test(name));
+
+const UC_DEADLINE = '2026-11-30';
+const UC_INFO = { platform: 'UC App', essays: '4 PIQs', recommendations: 'No routine letters', interview: 'No routine interview', rd: 'Nov 30 UC deadline' };
+const CSU_DEADLINE = '2026-11-30';
+const CSU_INFO = { platform: 'Cal State Apply', essays: 'No essay for general admission', recommendations: 'Not required', interview: 'Not offered', rd: 'Nov 30 CSU deadline' };
+
+// Verified deadlines for her confirmed/reference schools. Anything else she
+// adds starts with no deadline — she fills it in herself in the status
+// timeline below.
 const KNOWN_DEADLINES = {
-  'UC Berkeley': '2026-11-30',
-  'UCLA': '2026-11-30',
-  'UC San Diego': '2026-11-30',
-  'UC Irvine': '2026-11-30',
-  'San Diego State University': '2026-11-30',
-  'Cal State Long Beach': '2026-11-30',
-  'Cal State Fullerton': '2026-11-30',
-  'Cal State LA': '2026-11-30',
-  'CSU Northridge': '2026-11-30',
+  ...Object.fromEntries(UC_SCHOOLS.map(name => [name, UC_DEADLINE])),
+  ...Object.fromEntries(CSU_SCHOOLS.map(name => [name, CSU_DEADLINE])),
   'Northwestern University': '2027-01-02',
 };
-// Verified application requirements for the same confirmed schools, shown in
-// the Sample Application Quick Reference table. Any school without an entry
+// Verified application requirements for the same schools, shown in the
+// Sample Application Quick Reference table. Any school without an entry
 // here falls back to "Verify current cycle" rather than guessing.
 const SCHOOL_INFO = {
-  'UC Berkeley': { platform: 'UC App', essays: '4 PIQs', recommendations: 'No routine letters', interview: 'No routine interview', rd: 'Nov 30 UC deadline' },
-  'UCLA': { platform: 'UC App', essays: '4 PIQs', recommendations: 'No routine letters', interview: 'No routine interview', rd: 'Nov 30 UC deadline' },
-  'UC San Diego': { platform: 'UC App', essays: '4 PIQs', recommendations: 'No routine letters', interview: 'No routine interview', rd: 'Nov 30 UC deadline' },
-  'UC Irvine': { platform: 'UC App', essays: '4 PIQs', recommendations: 'No routine letters', interview: 'No routine interview', rd: 'Nov 30 UC deadline' },
+  ...Object.fromEntries(UC_SCHOOLS.map(name => [name, UC_INFO])),
+  ...Object.fromEntries(CSU_SCHOOLS.map(name => [name, CSU_INFO])),
   'Northwestern University': { platform: 'Common App / Coalition', essays: 'Personal statement optional; 1 required short answer', recommendations: '1 teacher + 1 counselor letter', interview: 'Optional (Glimpse video)', rd: 'Jan 2, 2027' },
-  'San Diego State University': { platform: 'Cal State Apply', essays: 'No essay for general admission', recommendations: 'Not required', interview: 'Not offered', rd: 'Nov 30 CSU deadline' },
-  'Cal State Long Beach': { platform: 'Cal State Apply', essays: 'No essay for general admission', recommendations: 'Not required', interview: 'Not offered', rd: 'Nov 30 CSU deadline' },
-  'Cal State Fullerton': { platform: 'Cal State Apply', essays: 'No essay for general admission', recommendations: 'Not required', interview: 'Not offered', rd: 'Nov 30 CSU deadline' },
-  'Cal State LA': { platform: 'Cal State Apply', essays: 'No essay for general admission', recommendations: 'Not required', interview: 'Not offered', rd: 'Nov 30 CSU deadline' },
-  'CSU Northridge': { platform: 'Cal State Apply', essays: 'No essay for general admission', recommendations: 'Not required', interview: 'Not offered', rd: 'Nov 30 CSU deadline' },
 };
 const UNVERIFIED_INFO = { platform: 'Verify current cycle', essays: 'Verify current cycle', recommendations: 'Verify current cycle', interview: 'Verify current cycle', rd: 'Verify current cycle' };
 const schoolChecks = [...document.querySelectorAll('.school-check')];
