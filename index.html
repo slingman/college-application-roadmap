@@ -26,7 +26,7 @@
 
   <div class="sticky">
     <nav class="nav">
-      <a href="#timeline">Timeline</a><a href="#mylist">Lotus's List</a><a href="#statustimeline">Status Timeline</a><a href="#schools">Programs to Consider</a><a href="#platforms">Application Platforms</a>
+      <a href="#timeline">Timeline</a><a href="#mylist">Lotus's List</a><a href="#schools">Programs to Consider</a><a href="#platforms">Application Platforms</a>
       <a href="#deadlines">Deadlines</a><a href="#aid">Financial Aid</a><a href="#psych">Psychology Prep</a>
     </nav>
   </div>
@@ -164,6 +164,31 @@
     </div>
   </section>
 
+  <section class="card" id="mylist">
+    <h2>🎯 LOTUS'S COLLEGE LIST</h2>
+    <div class="card-body">
+      <ol class="status-list" id="selectedSchoolsList"></ol>
+      <div class="add-school">
+        <input type="text" id="customSchoolInput" placeholder="Add another school…" aria-label="Add another school">
+        <button type="button" id="addSchoolBtn">Add</button>
+      </div>
+      <p class="note">Check schools below, or add your own above — deadlines prefill for known schools, and everything on this page updates automatically.</p>
+    </div>
+  </section>
+
+  <div class="grid full-width">
+    <section class="card">
+      <h2>🔎 SAMPLE APPLICATION QUICK REFERENCE</h2>
+      <div class="card-body table-scroll">
+        <table class="data-table">
+          <thead><tr><th>School</th><th>Platform</th><th>Essays</th><th>Recommendations</th><th>Interview</th><th>Typical RD</th></tr></thead>
+          <tbody id="quickRefBody"></tbody>
+        </table>
+        <p class="note">Reflects Lotus's current list — confirm each item on the school's official admissions page before submitting, since requirements can change year to year.</p>
+      </div>
+    </section>
+  </div>
+
   <div class="grid">
     <section class="card" id="deadlines">
       <h2>📅 KEY DEADLINES AT A GLANCE</h2>
@@ -232,26 +257,6 @@
       </div>
     </section>
   </div>
-
-  <section class="card" id="mylist">
-    <h2>🎯 LOTUS'S COLLEGE LIST</h2>
-    <div class="card-body">
-      <ol class="school-list" id="selectedSchoolsList"></ol>
-      <div class="add-school">
-        <input type="text" id="customSchoolInput" placeholder="Add another school…" aria-label="Add another school">
-        <button type="button" id="addSchoolBtn">Add</button>
-      </div>
-      <p class="note">Check schools below, or add your own above, and everything on this page updates automatically.</p>
-    </div>
-  </section>
-
-  <section class="card" id="statustimeline">
-    <h2>📍 APPLICATION STATUS TIMELINE</h2>
-    <div class="card-body">
-      <ol class="status-list" id="statusTimelineList"></ol>
-      <p class="note">Deadlines prefill for her confirmed schools — edit any date, and set a status as she moves through each application. Sorted by what's due soonest.</p>
-    </div>
-  </section>
 
   <section class="card" id="schools">
     <h2>🏫 PSYCHOLOGY PROGRAMS TO CONSIDER</h2>
@@ -337,19 +342,6 @@
       <p class="note">This is a planning shortlist, not a fixed ranking. Psychology strength, selectivity and program structure can vary by methodology and year; evaluate research opportunities, faculty expertise and overall fit for your goals. Checked boxes are on Lotus's current list — check more, or add her own above, as she decides.</p>
     </div>
   </section>
-
-  <div class="grid full-width">
-    <section class="card">
-      <h2>🔎 SAMPLE APPLICATION QUICK REFERENCE</h2>
-      <div class="card-body table-scroll">
-        <table class="data-table">
-          <thead><tr><th>School</th><th>Platform</th><th>Essays</th><th>Recommendations</th><th>Interview</th><th>Typical RD</th></tr></thead>
-          <tbody id="quickRefBody"></tbody>
-        </table>
-        <p class="note">Reflects Lotus's current list — confirm each item on the school's official admissions page before submitting, since requirements can change year to year.</p>
-      </div>
-    </section>
-  </div>
 
   <div class="grid two-column">
     <section class="card teal">

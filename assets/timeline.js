@@ -153,39 +153,9 @@ function removeSelectedSchool(name, type){
   refreshSchoolViews();
 }
 
-function renderSelectedSchools(){
-  if(!selectedList) return;
-  selectedList.innerHTML = '';
-  const all = getSelectedSchools();
-
-  if(all.length === 0){
-    const li = document.createElement('li');
-    li.className = 'empty-note';
-    li.textContent = 'Nothing on the list yet — check schools below or add your own above.';
-    selectedList.appendChild(li);
-    return;
-  }
-
-  all.forEach(({ name, type }) => {
-    const li = document.createElement('li');
-    li.className = 'selected-item';
-    const span = document.createElement('span');
-    span.textContent = name;
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'remove-school';
-    btn.textContent = '×';
-    btn.setAttribute('aria-label', 'Remove ' + name);
-    btn.addEventListener('click', () => removeSelectedSchool(name, type));
-    li.append(span, btn);
-    selectedList.appendChild(li);
-  });
-}
-
-// Status timeline: each school on the list gets an editable deadline and
-// status, sorted by what's due soonest. Deadlines prefill from known dates
-// where we have them (data.js), otherwise she fills them in herself.
-const statusList = document.getElementById('statusTimelineList');
+// Her College List: one live row per school with its deadline, status, and
+// a remove action, sorted by what's due soonest. Deadlines prefill from
+// KNOWN_DEADLINES where we have them, otherwise she fills them in herself.
 const STATUSES = [
   { value: 'not-started', label: 'Not Started' },
   { value: 'in-progress', label: 'In Progress' },
@@ -208,21 +178,21 @@ function daysLeftLabel(dateStr){
   return { text: days + ' days left', urgent: false };
 }
 
-function renderStatusTimeline(){
-  if(!statusList) return;
-  statusList.innerHTML = '';
-  const schools = getSelectedSchools().map(({ name }) => {
+function renderSelectedSchools(){
+  if(!selectedList) return;
+  selectedList.innerHTML = '';
+  const schools = getSelectedSchools().map(({ name, type }) => {
     const savedDeadline = localStorage.getItem(deadlineKey(name));
     const deadline = savedDeadline !== null ? savedDeadline : (KNOWN_DEADLINES[name] || '');
     const status = localStorage.getItem(statusKey(name)) || 'not-started';
-    return { name, deadline, status };
+    return { name, type, deadline, status };
   });
 
   if(schools.length === 0){
     const li = document.createElement('li');
     li.className = 'empty-note';
-    li.textContent = 'Add schools to Lotus\'s list above to start tracking deadlines.';
-    statusList.appendChild(li);
+    li.textContent = 'Nothing on the list yet — check schools below or add your own above.';
+    selectedList.appendChild(li);
     return;
   }
 
@@ -233,7 +203,7 @@ function renderStatusTimeline(){
     return a.deadline.localeCompare(b.deadline);
   });
 
-  schools.forEach(({ name, deadline, status }) => {
+  schools.forEach(({ name, type, deadline, status }) => {
     const li = document.createElement('li');
     li.className = 'status-row';
 
@@ -248,7 +218,7 @@ function renderStatusTimeline(){
     dateInput.setAttribute('aria-label', name + ' deadline');
     dateInput.addEventListener('change', () => {
       localStorage.setItem(deadlineKey(name), dateInput.value);
-      renderStatusTimeline();
+      renderSelectedSchools();
     });
 
     const select = document.createElement('select');
@@ -263,7 +233,7 @@ function renderStatusTimeline(){
     select.addEventListener('change', () => {
       localStorage.setItem(statusKey(name), select.value);
       select.className = 'status-select status-' + select.value;
-      renderStatusTimeline();
+      renderSelectedSchools();
     });
 
     const daysEl = document.createElement('span');
@@ -271,8 +241,15 @@ function renderStatusTimeline(){
     daysEl.className = 'status-days' + (info && info.urgent ? ' urgent' : '');
     daysEl.textContent = info ? info.text : 'No deadline set';
 
-    li.append(nameEl, dateInput, select, daysEl);
-    statusList.appendChild(li);
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'remove-school';
+    removeBtn.textContent = '×';
+    removeBtn.setAttribute('aria-label', 'Remove ' + name);
+    removeBtn.addEventListener('click', () => removeSelectedSchool(name, type));
+
+    li.append(nameEl, dateInput, select, daysEl, removeBtn);
+    selectedList.appendChild(li);
   });
 }
 
@@ -310,7 +287,6 @@ function renderQuickReference(){
 
 function refreshSchoolViews(){
   renderSelectedSchools();
-  renderStatusTimeline();
   renderQuickReference();
 }
 
