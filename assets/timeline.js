@@ -32,6 +32,9 @@ const KNOWN_DEADLINES = {
   'UC Irvine': '2026-11-30',
   'San Diego State University': '2026-11-30',
   'Cal State Long Beach': '2026-11-30',
+  'Cal State Fullerton': '2026-11-30',
+  'Cal State LA': '2026-11-30',
+  'CSU Northridge': '2026-11-30',
   'Northwestern University': '2027-01-02',
 };
 // Verified application requirements for the same confirmed schools, shown in
@@ -45,6 +48,9 @@ const SCHOOL_INFO = {
   'Northwestern University': { platform: 'Common App / Coalition', essays: 'Personal statement optional; 1 required short answer', recommendations: '1 teacher + 1 counselor letter', interview: 'Optional (Glimpse video)', rd: 'Jan 2, 2027' },
   'San Diego State University': { platform: 'Cal State Apply', essays: 'No essay for general admission', recommendations: 'Not required', interview: 'Not offered', rd: 'Nov 30 CSU deadline' },
   'Cal State Long Beach': { platform: 'Cal State Apply', essays: 'No essay for general admission', recommendations: 'Not required', interview: 'Not offered', rd: 'Nov 30 CSU deadline' },
+  'Cal State Fullerton': { platform: 'Cal State Apply', essays: 'No essay for general admission', recommendations: 'Not required', interview: 'Not offered', rd: 'Nov 30 CSU deadline' },
+  'Cal State LA': { platform: 'Cal State Apply', essays: 'No essay for general admission', recommendations: 'Not required', interview: 'Not offered', rd: 'Nov 30 CSU deadline' },
+  'CSU Northridge': { platform: 'Cal State Apply', essays: 'No essay for general admission', recommendations: 'Not required', interview: 'Not offered', rd: 'Nov 30 CSU deadline' },
 };
 const UNVERIFIED_INFO = { platform: 'Verify current cycle', essays: 'Verify current cycle', recommendations: 'Verify current cycle', interview: 'Verify current cycle', rd: 'Verify current cycle' };
 const schoolChecks = [...document.querySelectorAll('.school-check')];
