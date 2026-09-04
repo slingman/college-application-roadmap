@@ -276,37 +276,21 @@ function renderStatusTimeline(){
   });
 }
 
-function refreshSchoolViews(){
-  renderSelectedSchools();
-  renderStatusTimeline();
-}
-
-// Sample Application Quick Reference: unlike the list and status timeline
-// above, this does NOT update live as boxes are checked — it only refreshes
-// when she clicks "Update Quick Reference", so it reflects a deliberate
-// snapshot of her list rather than changing on every click.
-const QUICK_REF_KEY = 'college-roadmap-quickref-schools';
+// Sample Application Quick Reference: updates live along with the list and
+// status timeline above, from the same selected-schools data.
 const quickRefBody = document.getElementById('quickRefBody');
-const updateQuickRefBtn = document.getElementById('updateQuickRefBtn');
 
-function loadQuickRefSchools(){
-  try {
-    const raw = localStorage.getItem(QUICK_REF_KEY);
-    if(raw !== null) return JSON.parse(raw);
-  } catch(e){ /* fall through to default below */ }
-  return getSelectedSchools().map(s => s.name);
-}
-
-function renderQuickReference(names){
+function renderQuickReference(){
   if(!quickRefBody) return;
   quickRefBody.innerHTML = '';
+  const names = getSelectedSchools().map(s => s.name);
 
   if(names.length === 0){
     const tr = document.createElement('tr');
     const td = document.createElement('td');
     td.colSpan = 6;
     td.className = 'empty-note';
-    td.textContent = 'Nothing on her list yet — check schools above, then click Update Quick Reference.';
+    td.textContent = 'Nothing on her list yet — check schools below or add your own above.';
     tr.appendChild(td);
     quickRefBody.appendChild(tr);
     return;
@@ -324,11 +308,11 @@ function renderQuickReference(names){
   });
 }
 
-if(updateQuickRefBtn) updateQuickRefBtn.addEventListener('click', () => {
-  const names = getSelectedSchools().map(s => s.name);
-  localStorage.setItem(QUICK_REF_KEY, JSON.stringify(names));
-  renderQuickReference(names);
-});
+function refreshSchoolViews(){
+  renderSelectedSchools();
+  renderStatusTimeline();
+  renderQuickReference();
+}
 
 schoolChecks.forEach(box => {
   const key = schoolKey(box.dataset.school);
@@ -364,7 +348,6 @@ if(customInput) customInput.addEventListener('keydown', (e) => {
 });
 
 refreshSchoolViews();
-renderQuickReference(loadQuickRefSchools());
 
 // Set today's date dynamically in two places: the header and the footer
 (function setTodayDates(){
