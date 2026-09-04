@@ -13,7 +13,7 @@ A single-page planning dashboard for Lotus's Class of 2027 college applications 
 - **Lotus's College List** — a live list of the schools she's chosen, built from two inputs: checking a school in the reference list below, or typing a school into the free-form "Add another school" box. Both update the list automatically.
 - **Psychology Programs to Consider** — a ~50-school reference list (Reach / Target / Likely / CSU & Other), each with a checkbox to add it to her list. It's a planning shortlist, not a ranking.
 - **Application Status Timeline** — for every school currently on her list, an editable deadline and a status (Not Started / In Progress / Submitted / Decision Received), sorted by what's due soonest. Deadlines prefill for her confirmed schools and are otherwise left for her to fill in.
-- **Sample Application Quick Reference** — per-school platform, essay, recommendation, interview and deadline details for her actual list, verified against each school's official requirements at time of writing.
+- **Application Quick Reference** — per-school platform, essay, recommendation, interview and deadline details for her actual list, verified against each school's official requirements at time of writing.
 - Financial aid checklist, psychology-applicant checklist, application-platform reference, and an overall progress bar.
 
 ## How saving works

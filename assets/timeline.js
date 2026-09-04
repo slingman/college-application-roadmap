@@ -104,7 +104,7 @@ const KNOWN_DEADLINES = {
   ...Object.fromEntries(Object.entries(REFERENCE_SCHOOLS).filter(([, s]) => s.deadline).map(([name, s]) => [name, s.deadline])),
 };
 // Verified application requirements for the same schools, shown in the
-// Sample Application Quick Reference table. Any school without an entry
+// Application Quick Reference table. Any school without an entry
 // here falls back to "Verify current cycle" rather than guessing.
 const SCHOOL_INFO = {
   ...Object.fromEntries(UC_SCHOOLS.map(name => [name, UC_INFO])),
@@ -253,7 +253,7 @@ function renderSelectedSchools(){
   });
 }
 
-// Sample Application Quick Reference: updates live along with the list and
+// Application Quick Reference: updates live along with the list and
 // status timeline above, from the same selected-schools data.
 const quickRefBody = document.getElementById('quickRefBody');
 
