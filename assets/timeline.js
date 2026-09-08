@@ -340,3 +340,34 @@ refreshSchoolViews();
     console.warn('Could not set today\'s date dynamically', e);
   }
 })();
+
+// Move the "RIGHT NOW" highlight to whichever timeline month actually
+// contains today's date, instead of leaving it stuck on August forever.
+(function highlightCurrentMonth(){
+  const months = [...document.querySelectorAll('.month[data-start]')];
+  if(!months.length) return;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  let match = months.find(m => {
+    const start = new Date(m.dataset.start + 'T00:00:00');
+    const end = new Date(m.dataset.end + 'T00:00:00');
+    return today >= start && today <= end;
+  });
+
+  if(!match){
+    const first = months[0];
+    const last = months[months.length - 1];
+    if(today < new Date(first.dataset.start + 'T00:00:00')) match = first;
+    else if(today > new Date(last.dataset.end + 'T00:00:00')) match = last;
+  }
+  if(!match) return;
+
+  months.forEach(m => m.classList.remove('now'));
+  match.classList.add('now');
+  const head = match.querySelector('.month-head');
+  if(head && !head.textContent.includes('RIGHT NOW')){
+    head.innerHTML += ' · RIGHT NOW';
+  }
+})();
