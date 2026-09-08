@@ -364,10 +364,18 @@ refreshSchoolViews();
   }
   if(!match) return;
 
-  months.forEach(m => m.classList.remove('now'));
+  months.forEach(m => {
+    m.classList.remove('now');
+    const oldBadge = m.querySelector('.today-badge');
+    if(oldBadge) oldBadge.remove();
+  });
   match.classList.add('now');
   const head = match.querySelector('.month-head');
-  if(head && !head.textContent.includes('RIGHT NOW')){
-    head.innerHTML += ' · RIGHT NOW';
+  if(head){
+    const badge = document.createElement('span');
+    badge.className = 'today-badge';
+    const opts = { weekday: 'short', month: 'short', day: 'numeric' };
+    badge.textContent = '⏰ TODAY: ' + today.toLocaleDateString(undefined, opts);
+    head.appendChild(badge);
   }
 })();

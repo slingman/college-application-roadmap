@@ -44,6 +44,20 @@ h1{font-size:clamp(28px,4vw,52px);line-height:1;margin:0 0 8px;letter-spacing:-1
 .month.now .month-head{background:var(--red)}
 .month.dec .month-head{background:var(--teal)}
 .month.may .month-head{background:var(--green)}
+.month.now{box-shadow:inset 0 0 0 3px var(--red);animation:urgent-pulse 2s ease-in-out infinite}
+.month.now .month-head{animation:urgent-pulse-head 2s ease-in-out infinite}
+.today-badge{display:block;font-size:11px;font-weight:800;letter-spacing:.3px;margin-top:3px;opacity:.95}
+@keyframes urgent-pulse{
+  0%,100%{box-shadow:inset 0 0 0 3px var(--red)}
+  50%{box-shadow:inset 0 0 0 3px #ff8a8a}
+}
+@keyframes urgent-pulse-head{
+  0%,100%{background:var(--red)}
+  50%{background:#e04848}
+}
+@media(prefers-reduced-motion:reduce){
+  .month.now, .month.now .month-head{animation:none}
+}
 .month-body{padding:12px 11px}
 .task{display:flex;gap:8px;margin:8px 0;font-size:12px}
 .task input{accent-color:var(--navy);margin-top:3px;flex:0 0 auto}
