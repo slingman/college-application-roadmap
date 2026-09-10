@@ -286,15 +286,28 @@ function renderSelectedSchools(){
     removeBtn.addEventListener('click', () => removeSelectedSchool(name, type));
     removeTd.appendChild(removeBtn);
 
+    const testingTd = document.createElement('td');
+    const testingMatch = info.testing ? info.testing.match(/^(.*?)\s*(\([^)]+\))$/) : null;
+    if(testingMatch){
+      testingTd.appendChild(document.createTextNode(testingMatch[1]));
+      const note = document.createElement('div');
+      note.className = 'small';
+      note.textContent = testingMatch[2];
+      testingTd.appendChild(note);
+    } else {
+      testingTd.textContent = info.testing;
+    }
+
     tr.appendChild(nameTd);
     tr.appendChild(dateTd);
     tr.appendChild(statusTd);
     tr.appendChild(daysTd);
-    [info.platform, info.essays, info.recommendations, info.interview, info.testing].forEach(text => {
+    [info.platform, info.essays, info.recommendations, info.interview].forEach(text => {
       const td = document.createElement('td');
       td.textContent = text;
       tr.appendChild(td);
     });
+    tr.appendChild(testingTd);
     tr.appendChild(removeTd);
     myListBody.appendChild(tr);
   });
