@@ -359,18 +359,6 @@ refreshSchoolViews();
   }
   if(!match) return;
 
-  months.forEach(m => {
-    m.classList.remove('now');
-    const oldBadge = m.querySelector('.today-badge');
-    if(oldBadge) oldBadge.remove();
-  });
+  months.forEach(m => m.classList.remove('now'));
   match.classList.add('now');
-  const head = match.querySelector('.month-head');
-  if(head){
-    const badge = document.createElement('span');
-    badge.className = 'today-badge';
-    const opts = { weekday: 'short', month: 'short', day: 'numeric' };
-    badge.textContent = '⏰ TODAY: ' + today.toLocaleDateString(undefined, opts);
-    head.appendChild(badge);
-  }
 })();
