@@ -114,6 +114,7 @@ ol.school-list li{padding:2px 0}
 .platform.common{border-left:5px solid var(--green)} .platform.uc{border-left:5px solid var(--blue)}
 .platform.csu{border-left:5px solid var(--orange)} .platform.other{border-left:5px solid var(--purple)}
 .data-table{width:100%;border-collapse:collapse;font-size:11px}
+.data-table .dot{vertical-align:middle;margin-bottom:1px}
 .data-table td,.data-table th{border-bottom:1px solid var(--line);padding:7px 4px;vertical-align:top;text-align:left}
 .data-table td:first-child,.data-table th:first-child{font-weight:900;white-space:nowrap}
 .note{font-size:10px;color:var(--muted);margin-top:10px}

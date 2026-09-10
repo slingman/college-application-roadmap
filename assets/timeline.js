@@ -113,6 +113,17 @@ const SCHOOL_INFO = {
   ...Object.fromEntries(Object.entries(REFERENCE_SCHOOLS).map(([name, s]) => [name, s])),
 };
 const UNVERIFIED_INFO = { platform: 'Verify current cycle', essays: 'Verify current cycle', recommendations: 'Verify current cycle', interview: 'Verify current cycle', rd: 'Verify current cycle' };
+
+// Same platform dot shown in the reference list above, reused here so a
+// school reads the same way in both places. Custom (free-typed) schools
+// have no verified platform, so they get no dot rather than a guess.
+function platformDot(name){
+  if(UC_SCHOOLS.includes(name)) return { cls: 'blue', title: 'UC Application' };
+  if(CSU_SCHOOLS.includes(name)) return { cls: 'orange', title: 'CSU Application' };
+  const info = SCHOOL_INFO[name];
+  if(info && info.platform && info.platform.includes('Common App')) return { cls: 'green', title: 'Common App' };
+  return null;
+}
 const schoolChecks = [...document.querySelectorAll('.school-check')];
 const myListBody = document.getElementById('myListBody');
 const customInput = document.getElementById('customSchoolInput');
@@ -216,7 +227,15 @@ function renderSelectedSchools(){
     const tr = document.createElement('tr');
 
     const nameTd = document.createElement('td');
-    nameTd.textContent = name;
+    const dot = platformDot(name);
+    if(dot){
+      const dotEl = document.createElement('i');
+      dotEl.className = 'dot ' + dot.cls;
+      dotEl.title = dot.title;
+      nameTd.appendChild(dotEl);
+      nameTd.appendChild(document.createTextNode(' '));
+    }
+    nameTd.appendChild(document.createTextNode(name));
 
     const dateTd = document.createElement('td');
     const dateInput = document.createElement('input');
