@@ -114,7 +114,7 @@ const SCHOOL_INFO = {
 };
 const UNVERIFIED_INFO = { platform: 'Verify current cycle', essays: 'Verify current cycle', recommendations: 'Verify current cycle', interview: 'Verify current cycle', rd: 'Verify current cycle' };
 const schoolChecks = [...document.querySelectorAll('.school-check')];
-const selectedList = document.getElementById('selectedSchoolsList');
+const myListBody = document.getElementById('myListBody');
 const customInput = document.getElementById('customSchoolInput');
 const addSchoolBtn = document.getElementById('addSchoolBtn');
 
@@ -178,21 +178,30 @@ function daysLeftLabel(dateStr){
   return { text: days + ' days left', urgent: false };
 }
 
+// Her College List: one live row per school combining tracking (deadline,
+// status, days left) and reference details (platform, essays,
+// recommendations, interview) that used to be two separate sections with
+// duplicated school names and overlapping deadline info. Sorted by what's
+// due soonest.
 function renderSelectedSchools(){
-  if(!selectedList) return;
-  selectedList.innerHTML = '';
+  if(!myListBody) return;
+  myListBody.innerHTML = '';
   const schools = getSelectedSchools().map(({ name, type }) => {
     const savedDeadline = localStorage.getItem(deadlineKey(name));
     const deadline = savedDeadline !== null ? savedDeadline : (KNOWN_DEADLINES[name] || '');
     const status = localStorage.getItem(statusKey(name)) || 'not-started';
-    return { name, type, deadline, status };
+    const info = SCHOOL_INFO[name] || UNVERIFIED_INFO;
+    return { name, type, deadline, status, info };
   });
 
   if(schools.length === 0){
-    const li = document.createElement('li');
-    li.className = 'empty-note';
-    li.textContent = 'Nothing on the list yet — check schools below or add your own above.';
-    selectedList.appendChild(li);
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = 9;
+    td.className = 'empty-note';
+    td.textContent = 'Nothing on the list yet — check schools below or add your own above.';
+    tr.appendChild(td);
+    myListBody.appendChild(tr);
     return;
   }
 
@@ -203,14 +212,13 @@ function renderSelectedSchools(){
     return a.deadline.localeCompare(b.deadline);
   });
 
-  schools.forEach(({ name, type, deadline, status }) => {
-    const li = document.createElement('li');
-    li.className = 'status-row';
+  schools.forEach(({ name, type, deadline, status, info }) => {
+    const tr = document.createElement('tr');
 
-    const nameEl = document.createElement('span');
-    nameEl.className = 'status-school';
-    nameEl.textContent = name;
+    const nameTd = document.createElement('td');
+    nameTd.textContent = name;
 
+    const dateTd = document.createElement('td');
     const dateInput = document.createElement('input');
     dateInput.type = 'date';
     dateInput.className = 'status-date';
@@ -220,7 +228,15 @@ function renderSelectedSchools(){
       localStorage.setItem(deadlineKey(name), dateInput.value);
       renderSelectedSchools();
     });
+    dateTd.appendChild(dateInput);
+    if(info.rd){
+      const rdNote = document.createElement('div');
+      rdNote.className = 'small';
+      rdNote.textContent = info.rd;
+      dateTd.appendChild(rdNote);
+    }
 
+    const statusTd = document.createElement('td');
     const select = document.createElement('select');
     select.className = 'status-select status-' + status;
     STATUSES.forEach(s => {
@@ -235,59 +251,38 @@ function renderSelectedSchools(){
       select.className = 'status-select status-' + select.value;
       renderSelectedSchools();
     });
+    statusTd.appendChild(select);
 
-    const daysEl = document.createElement('span');
-    const info = daysLeftLabel(deadline);
-    daysEl.className = 'status-days' + (info && info.urgent ? ' urgent' : '');
-    daysEl.textContent = info ? info.text : 'No deadline set';
+    const daysTd = document.createElement('td');
+    const daysInfo = daysLeftLabel(deadline);
+    daysTd.className = 'status-days' + (daysInfo && daysInfo.urgent ? ' urgent' : '');
+    daysTd.textContent = daysInfo ? daysInfo.text : 'No deadline set';
 
+    const removeTd = document.createElement('td');
     const removeBtn = document.createElement('button');
     removeBtn.type = 'button';
     removeBtn.className = 'remove-school';
     removeBtn.textContent = '×';
     removeBtn.setAttribute('aria-label', 'Remove ' + name);
     removeBtn.addEventListener('click', () => removeSelectedSchool(name, type));
+    removeTd.appendChild(removeBtn);
 
-    li.append(nameEl, dateInput, select, daysEl, removeBtn);
-    selectedList.appendChild(li);
-  });
-}
-
-// Application Quick Reference: updates live along with the list and
-// status timeline above, from the same selected-schools data.
-const quickRefBody = document.getElementById('quickRefBody');
-
-function renderQuickReference(){
-  if(!quickRefBody) return;
-  quickRefBody.innerHTML = '';
-  const names = getSelectedSchools().map(s => s.name);
-
-  if(names.length === 0){
-    const tr = document.createElement('tr');
-    const td = document.createElement('td');
-    td.colSpan = 6;
-    td.className = 'empty-note';
-    td.textContent = 'Nothing on her list yet — check schools below or add your own above.';
-    tr.appendChild(td);
-    quickRefBody.appendChild(tr);
-    return;
-  }
-
-  names.forEach(name => {
-    const info = SCHOOL_INFO[name] || UNVERIFIED_INFO;
-    const tr = document.createElement('tr');
-    [name, info.platform, info.essays, info.recommendations, info.interview, info.rd].forEach(text => {
+    tr.appendChild(nameTd);
+    tr.appendChild(dateTd);
+    tr.appendChild(statusTd);
+    tr.appendChild(daysTd);
+    [info.platform, info.essays, info.recommendations, info.interview].forEach(text => {
       const td = document.createElement('td');
       td.textContent = text;
       tr.appendChild(td);
     });
-    quickRefBody.appendChild(tr);
+    tr.appendChild(removeTd);
+    myListBody.appendChild(tr);
   });
 }
 
 function refreshSchoolViews(){
   renderSelectedSchools();
-  renderQuickReference();
 }
 
 schoolChecks.forEach(box => {
