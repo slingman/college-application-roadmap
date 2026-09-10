@@ -89,12 +89,12 @@ h1{font-size:clamp(28px,4vw,52px);line-height:1;margin:0 0 8px;letter-spacing:-1
 .school-group.reach h3{color:#9c6200}.school-group.target h3{color:#6c2d9a}.school-group.likely h3{color:#16733c}
 .school-pick{display:flex;align-items:center;gap:6px;cursor:pointer;flex-wrap:wrap}
 .school-pick input{accent-color:var(--navy);flex:0 0 auto}
-.school-state{color:var(--muted);font-weight:800;font-size:9px;background:var(--line);border-radius:4px;padding:2px 5px;white-space:nowrap;margin-left:6px}
+.school-state{flex:0 0 26px;width:26px;box-sizing:border-box;color:var(--muted);font-weight:800;font-size:9px;background:var(--line);border-radius:4px;padding:2px 0;white-space:nowrap;text-align:center;margin-left:6px}
 .school-state.region-west{color:#9d174d;background:#fce7f3}
 .school-state.region-midwest{color:#334155;background:#e2e8f0}
 .school-state.region-northeast{color:#3730a3;background:#e0e7ff}
 .school-state.region-south{color:#92400e;background:#fef3c7}
-.accept-rate{margin-left:auto;color:var(--muted);font-weight:700;font-size:10px;white-space:nowrap;width:28px;text-align:right}
+.accept-rate{flex:0 0 28px;width:28px;margin-left:auto;color:var(--muted);font-weight:700;font-size:10px;white-space:nowrap;text-align:right}
 .add-school{display:flex;gap:6px;margin-top:10px}
 .add-school input{flex:1;min-width:0;padding:6px 8px;border:1px solid var(--line);border-radius:8px;font-size:12px;font-family:inherit}
 .add-school button{border:none;background:var(--navy);color:#fff;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:800;cursor:pointer}
