@@ -128,7 +128,7 @@ footer strong{color:#ffd75a}
 .nav{display:flex;gap:7px;overflow:auto}
 .nav a{white-space:nowrap;text-decoration:none;background:white;border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:11px;font-weight:850}
 .table-scroll{overflow:auto}
-#schools{margin-top:16px}
+#schools,#mylist,#timeline{margin-top:16px}
 
 /* Responsive adjustments: if the viewport gets very narrow, allow months to stack to preserve readability */
 @media(max-width:720px){
