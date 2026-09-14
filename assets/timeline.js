@@ -128,6 +128,7 @@ const schoolChecks = [...document.querySelectorAll('.school-check')];
 const myListBody = document.getElementById('myListBody');
 const customInput = document.getElementById('customSchoolInput');
 const addSchoolBtn = document.getElementById('addSchoolBtn');
+const essayTrackerBody = document.getElementById('essayTrackerBody');
 
 function schoolKey(name){ return 'college-roadmap-school-' + name; }
 
@@ -176,6 +177,7 @@ const STATUSES = [
 
 function deadlineKey(name){ return 'college-roadmap-deadline-' + name; }
 function statusKey(name){ return 'college-roadmap-status-' + name; }
+function notesKey(name){ return 'college-roadmap-notes-' + name; }
 
 function daysLeftLabel(dateStr){
   if(!dateStr) return null;
@@ -208,7 +210,7 @@ function renderSelectedSchools(){
   if(schools.length === 0){
     const tr = document.createElement('tr');
     const td = document.createElement('td');
-    td.colSpan = 10;
+    td.colSpan = 11;
     td.className = 'empty-note';
     td.textContent = 'Nothing on the list yet — check schools below or add your own above.';
     tr.appendChild(td);
@@ -277,6 +279,18 @@ function renderSelectedSchools(){
     daysTd.className = 'status-days' + (daysInfo && daysInfo.urgent ? ' urgent' : '');
     daysTd.textContent = daysInfo ? daysInfo.text : 'No deadline set';
 
+    const notesTd = document.createElement('td');
+    const notesInput = document.createElement('input');
+    notesInput.type = 'text';
+    notesInput.className = 'status-notes';
+    notesInput.placeholder = 'Why this school…';
+    notesInput.value = localStorage.getItem(notesKey(name)) || '';
+    notesInput.setAttribute('aria-label', 'Why ' + name);
+    notesInput.addEventListener('input', () => {
+      localStorage.setItem(notesKey(name), notesInput.value);
+    });
+    notesTd.appendChild(notesInput);
+
     const removeTd = document.createElement('td');
     const removeBtn = document.createElement('button');
     removeBtn.type = 'button';
@@ -308,6 +322,7 @@ function renderSelectedSchools(){
       tr.appendChild(td);
     });
     tr.appendChild(testingTd);
+    tr.appendChild(notesTd);
     tr.appendChild(removeTd);
     myListBody.appendChild(tr);
   });
@@ -315,6 +330,7 @@ function renderSelectedSchools(){
 
 function refreshSchoolViews(){
   renderSelectedSchools();
+  renderEssayTracker();
 }
 
 schoolChecks.forEach(box => {
@@ -351,6 +367,287 @@ if(customInput) customInput.addEventListener('keydown', (e) => {
 });
 
 refreshSchoolViews();
+
+// Recommenders: who's writing for her and where each letter stands,
+// tracked independently of the school list itself.
+const RECOMMENDERS_KEY = 'college-roadmap-recommenders';
+const RECOMMENDER_STATUSES = [
+  { value: 'not-asked', label: 'Not Asked' },
+  { value: 'asked', label: 'Asked' },
+  { value: 'confirmed', label: 'Confirmed' },
+  { value: 'submitted', label: 'Submitted' },
+];
+const recommendersBody = document.getElementById('recommendersBody');
+const recommenderNameInput = document.getElementById('recommenderNameInput');
+const recommenderSubjectInput = document.getElementById('recommenderSubjectInput');
+const addRecommenderBtn = document.getElementById('addRecommenderBtn');
+
+function loadRecommenders(){
+  try {
+    const raw = localStorage.getItem(RECOMMENDERS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch(e){
+    return [];
+  }
+}
+function saveRecommenders(list){
+  localStorage.setItem(RECOMMENDERS_KEY, JSON.stringify(list));
+}
+
+function renderRecommenders(){
+  if(!recommendersBody) return;
+  const list = loadRecommenders();
+  recommendersBody.innerHTML = '';
+
+  if(list.length === 0){
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = 4;
+    td.className = 'empty-note';
+    td.textContent = 'No recommenders added yet.';
+    tr.appendChild(td);
+    recommendersBody.appendChild(tr);
+    return;
+  }
+
+  list.forEach((rec, i) => {
+    const tr = document.createElement('tr');
+
+    const nameTd = document.createElement('td');
+    nameTd.textContent = rec.name;
+
+    const subjectTd = document.createElement('td');
+    subjectTd.textContent = rec.subject;
+
+    const statusTd = document.createElement('td');
+    const select = document.createElement('select');
+    select.className = 'status-select status-' + rec.status;
+    RECOMMENDER_STATUSES.forEach(s => {
+      const opt = document.createElement('option');
+      opt.value = s.value;
+      opt.textContent = s.label;
+      if(s.value === rec.status) opt.selected = true;
+      select.appendChild(opt);
+    });
+    select.addEventListener('change', () => {
+      const current = loadRecommenders();
+      current[i].status = select.value;
+      saveRecommenders(current);
+      select.className = 'status-select status-' + select.value;
+    });
+    statusTd.appendChild(select);
+
+    const removeTd = document.createElement('td');
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'remove-school';
+    removeBtn.textContent = '×';
+    removeBtn.setAttribute('aria-label', 'Remove ' + rec.name);
+    removeBtn.addEventListener('click', () => {
+      const current = loadRecommenders();
+      current.splice(i, 1);
+      saveRecommenders(current);
+      renderRecommenders();
+    });
+    removeTd.appendChild(removeBtn);
+
+    tr.appendChild(nameTd);
+    tr.appendChild(subjectTd);
+    tr.appendChild(statusTd);
+    tr.appendChild(removeTd);
+    recommendersBody.appendChild(tr);
+  });
+}
+
+function addRecommender(){
+  if(!recommenderNameInput) return;
+  const name = recommenderNameInput.value.trim();
+  if(!name) return;
+  const subject = recommenderSubjectInput ? recommenderSubjectInput.value.trim() : '';
+  const list = loadRecommenders();
+  list.push({ name, subject, status: 'not-asked' });
+  saveRecommenders(list);
+  recommenderNameInput.value = '';
+  if(recommenderSubjectInput) recommenderSubjectInput.value = '';
+  renderRecommenders();
+}
+
+if(addRecommenderBtn) addRecommenderBtn.addEventListener('click', addRecommender);
+[recommenderNameInput, recommenderSubjectInput].forEach(input => {
+  if(!input) return;
+  input.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter'){
+      e.preventDefault();
+      addRecommender();
+    }
+  });
+});
+
+renderRecommenders();
+
+// Essay Tracker: per-school list of supplemental essay prompts (beyond the
+// shared personal statement, which is tracked in the timeline instead),
+// each with its own done/not-done checkbox. Rebuilt whenever the school
+// list changes via refreshSchoolViews(), so it always matches her list.
+function essaysKey(name){ return 'college-roadmap-essays-' + name; }
+
+function loadEssays(name){
+  try {
+    const raw = localStorage.getItem(essaysKey(name));
+    return raw ? JSON.parse(raw) : [];
+  } catch(e){
+    return [];
+  }
+}
+function saveEssays(name, list){
+  localStorage.setItem(essaysKey(name), JSON.stringify(list));
+}
+
+function renderEssayTracker(){
+  if(!essayTrackerBody) return;
+  const schools = getSelectedSchools();
+
+  // Re-rendering rebuilds every <details> element, which would otherwise
+  // reset them all closed on every checkbox click — remember which ones
+  // were open first and restore that after.
+  const openNames = new Set(
+    [...essayTrackerBody.querySelectorAll('details[open]')].map(d => d.dataset.school)
+  );
+
+  essayTrackerBody.innerHTML = '';
+
+  if(schools.length === 0){
+    const empty = document.createElement('p');
+    empty.className = 'empty-note';
+    empty.textContent = 'Add schools to her list above to track essay prompts here.';
+    essayTrackerBody.appendChild(empty);
+    return;
+  }
+
+  schools.forEach(({ name }) => {
+    const essays = loadEssays(name);
+    const done = essays.filter(e => e.done).length;
+
+    const details = document.createElement('details');
+    details.className = 'essay-school';
+    details.dataset.school = name;
+    if(openNames.has(name)) details.open = true;
+
+    const summary = document.createElement('summary');
+    const dot = platformDot(name);
+    if(dot){
+      const dotEl = document.createElement('i');
+      dotEl.className = 'dot ' + dot.cls;
+      dotEl.title = dot.title;
+      summary.appendChild(dotEl);
+      summary.appendChild(document.createTextNode(' '));
+    }
+    summary.appendChild(document.createTextNode(name + ' '));
+    const countSpan = document.createElement('span');
+    countSpan.className = 'essay-count';
+    countSpan.textContent = essays.length ? '(' + done + '/' + essays.length + ' done)' : '(none added)';
+    summary.appendChild(countSpan);
+    details.appendChild(summary);
+
+    const list = document.createElement('ul');
+    list.className = 'essay-list';
+    essays.forEach((essay, i) => {
+      const li = document.createElement('li');
+      const label = document.createElement('label');
+      label.className = 'check';
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.checked = essay.done;
+      cb.addEventListener('change', () => {
+        const current = loadEssays(name);
+        current[i].done = cb.checked;
+        saveEssays(name, current);
+        renderEssayTracker();
+      });
+      label.appendChild(cb);
+      const textSpan = document.createElement('span');
+      textSpan.textContent = essay.text + (essay.wordLimit ? ' (' + essay.wordLimit + 'w)' : '');
+      label.appendChild(textSpan);
+      li.appendChild(label);
+
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.className = 'remove-school';
+      removeBtn.textContent = '×';
+      removeBtn.setAttribute('aria-label', 'Remove essay prompt');
+      removeBtn.addEventListener('click', () => {
+        const current = loadEssays(name);
+        current.splice(i, 1);
+        saveEssays(name, current);
+        renderEssayTracker();
+      });
+      li.appendChild(removeBtn);
+      list.appendChild(li);
+    });
+    details.appendChild(list);
+
+    const addRow = document.createElement('div');
+    addRow.className = 'add-school';
+    const textInput = document.createElement('input');
+    textInput.type = 'text';
+    textInput.placeholder = 'Essay prompt (e.g. "Why ' + name + '")';
+    textInput.setAttribute('aria-label', 'New essay prompt for ' + name);
+    const wordInput = document.createElement('input');
+    wordInput.type = 'text';
+    wordInput.className = 'essay-word-limit';
+    wordInput.placeholder = 'Word limit';
+    wordInput.setAttribute('aria-label', 'Word limit');
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.textContent = 'Add';
+    function addEssay(){
+      const text = textInput.value.trim();
+      if(!text) return;
+      const wordLimit = wordInput.value.trim();
+      const current = loadEssays(name);
+      current.push({ text, wordLimit, done: false });
+      saveEssays(name, current);
+      renderEssayTracker();
+    }
+    addBtn.addEventListener('click', addEssay);
+    [textInput, wordInput].forEach(input => {
+      input.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter'){
+          e.preventDefault();
+          addEssay();
+        }
+      });
+    });
+    addRow.appendChild(textInput);
+    addRow.appendChild(wordInput);
+    addRow.appendChild(addBtn);
+    details.appendChild(addRow);
+
+    essayTrackerBody.appendChild(details);
+  });
+}
+
+// Her personal target is "first week of November 2026" per the timeline
+// callout; Nov 7 (end of that week) is the concrete date used here.
+(function renderCountdown(){
+  const TARGET_DATE = '2026-11-07';
+  const HARD_DEADLINE = '2026-11-30';
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  function daysUntil(dateStr){
+    const d = new Date(dateStr + 'T00:00:00');
+    return Math.round((d - today) / 86400000);
+  }
+  function render(id, dateStr){
+    const el = document.getElementById(id);
+    if(!el) return;
+    const days = daysUntil(dateStr);
+    el.textContent = days > 0 ? days : 'Passed';
+  }
+  render('daysToTarget', TARGET_DATE);
+  render('daysToDeadline', HARD_DEADLINE);
+})();
 
 // Set today's date dynamically in two places: the header and the footer
 (function setTodayDates(){

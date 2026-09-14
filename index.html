@@ -26,7 +26,7 @@
 
   <div class="sticky">
     <nav class="nav">
-      <a href="#schools">Programs to Consider</a><a href="#mylist">Lotus's List</a><a href="#timeline">Timeline</a><a href="#platforms">Application Platforms</a>
+      <a href="#schools">Programs to Consider</a><a href="#mylist">Lotus's List</a><a href="#recommenders">Recommenders</a><a href="#essaytracker">Essay Tracker</a><a href="#timeline">Timeline</a><a href="#platforms">Application Platforms</a>
       <a href="#deadlines">Deadlines</a><a href="#aid">Financial Aid</a><a href="#psych">Psychology Prep</a>
     </nav>
   </div>
@@ -42,6 +42,10 @@
       <h2>📈 APPLICATION PROGRESS</h2>
       <div class="card-body">
         <div class="progress-wrap"><progress id="progress" value="0" max="100"></progress><span class="progress-num" id="progressNum">0%</span></div>
+        <div class="countdown">
+          <span class="countdown-item"><strong id="daysToTarget">--</strong> days to her Nov target</span>
+          <span class="countdown-item"><strong id="daysToDeadline">--</strong> days to the hard deadline</span>
+        </div>
         <label class="check"><input type="checkbox" data-progress>College list</label>
         <label class="check"><input type="checkbox" data-progress>Common App account</label>
         <label class="check"><input type="checkbox" data-progress>UC account</label>
@@ -155,7 +159,7 @@
     <h2>🎯 LOTUS'S COLLEGE LIST</h2>
     <div class="card-body table-scroll">
       <table class="data-table">
-        <thead><tr><th>School</th><th>Deadline</th><th>Status</th><th>Days Left</th><th>Platform</th><th>Essays</th><th>Recommendations</th><th>Interview</th><th>SAT/ACT</th><th></th></tr></thead>
+        <thead><tr><th>School</th><th>Deadline</th><th>Status</th><th>Days Left</th><th>Platform</th><th>Essays</th><th>Recommendations</th><th>Interview</th><th>SAT/ACT</th><th>Why this school</th><th></th></tr></thead>
         <tbody id="myListBody"></tbody>
       </table>
       <div class="add-school">
@@ -163,6 +167,28 @@
         <button type="button" id="addSchoolBtn">Add</button>
       </div>
       <p class="note">Check schools below, or add your own above — deadlines prefill for known schools, and everything updates automatically. Confirm each item on the school's official admissions page before submitting, since requirements can change year to year.</p>
+    </div>
+  </section>
+
+  <section class="card" id="recommenders">
+    <h2>🤝 RECOMMENDERS</h2>
+    <div class="card-body table-scroll">
+      <table class="data-table">
+        <thead><tr><th>Name</th><th>Subject / Role</th><th>Status</th><th></th></tr></thead>
+        <tbody id="recommendersBody"></tbody>
+      </table>
+      <div class="add-school">
+        <input type="text" id="recommenderNameInput" placeholder="Teacher/counselor name…" aria-label="Recommender name">
+        <input type="text" id="recommenderSubjectInput" placeholder="Subject / role…" aria-label="Recommender subject or role">
+        <button type="button" id="addRecommenderBtn">Add</button>
+      </div>
+      <p class="note">Track who's writing for her and where each letter stands — most schools on her list share one Common App letter, but UC/CSU don't take any.</p>
+    </div>
+  </section>
+
+  <section class="card" id="essaytracker">
+    <h2>📝 ESSAY TRACKER</h2>
+    <div class="card-body" id="essayTrackerBody">
     </div>
   </section>
 
