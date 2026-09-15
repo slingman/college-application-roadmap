@@ -627,10 +627,10 @@ function renderEssayTracker(){
   });
 }
 
-// Her personal target is "first week of November 2026" per the timeline
-// callout; Nov 7 (end of that week) is the concrete date used here.
+// Her personal target is October 30, 2026 — a buffer before the Nov 30
+// hard deadline, per the October timeline callout.
 (function renderCountdown(){
-  const TARGET_DATE = '2026-11-07';
+  const TARGET_DATE = '2026-10-30';
   const HARD_DEADLINE = '2026-11-30';
   const today = new Date();
   today.setHours(0, 0, 0, 0);
