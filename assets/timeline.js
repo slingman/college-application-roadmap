@@ -682,8 +682,8 @@ const refreshActivitiesListLink = setupDocLink('activitiesListLink', 'activities
 // Uses the narrow drive.file scope, not full Drive access: the app only
 // ever sees a file after she explicitly picks it in the dialog, never her
 // whole Drive.
-const GOOGLE_API_KEY = '';
-const GOOGLE_CLIENT_ID = '';
+const GOOGLE_API_KEY = 'AIzaSyBytGQe8kXA9Ah0yv6bqmr-_h8UgZArfN4';
+const GOOGLE_CLIENT_ID = '617506186509-nbo68upteh4k1j7v0ohj7e31s65t86mk.apps.googleusercontent.com';
 const GOOGLE_DRIVE_SCOPE = 'https://www.googleapis.com/auth/drive.file';
 
 function googleIntegrationConfigured(){
