@@ -108,6 +108,13 @@ h1{font-size:clamp(28px,4vw,52px);line-height:1;margin:0 0 8px;letter-spacing:-1
 .essay-list li{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 0;font-size:12px;border-bottom:1px solid var(--line)}
 .essay-list li:last-child{border-bottom:none}
 .essay-list .check{flex:1;margin:0}
+.essay-link-input{flex:0 0 140px}
+.doclink-widget{margin-bottom:12px}
+.doclink-widget strong{display:block;font-size:12px;margin-bottom:5px}
+.doclink{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.doclink input{flex:1;min-width:160px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;font-size:12px;font-family:inherit}
+.doclink-open{flex:0 0 auto;color:var(--blue);font-weight:800;font-size:11px;text-decoration:none;white-space:nowrap}
+.doclink-open:hover{text-decoration:underline}
 ol.school-list{margin:0;padding-left:20px;font-size:11px}
 ol.school-list li{padding:2px 0}
 .status-date{border:1px solid var(--line);border-radius:8px;padding:5px 7px;font-size:11px;font-family:inherit}

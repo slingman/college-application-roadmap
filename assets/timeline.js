@@ -570,6 +570,16 @@ function renderEssayTracker(){
       label.appendChild(textSpan);
       li.appendChild(label);
 
+      if(essay.link){
+        const openLink = document.createElement('a');
+        openLink.className = 'doclink-open';
+        openLink.href = essay.link;
+        openLink.target = '_blank';
+        openLink.rel = 'noopener';
+        openLink.textContent = 'Open ↗';
+        li.appendChild(openLink);
+      }
+
       const removeBtn = document.createElement('button');
       removeBtn.type = 'button';
       removeBtn.className = 'remove-school';
@@ -597,6 +607,11 @@ function renderEssayTracker(){
     wordInput.className = 'essay-word-limit';
     wordInput.placeholder = 'Word limit';
     wordInput.setAttribute('aria-label', 'Word limit');
+    const linkInput = document.createElement('input');
+    linkInput.type = 'url';
+    linkInput.className = 'essay-link-input';
+    linkInput.placeholder = 'Doc link (optional)';
+    linkInput.setAttribute('aria-label', 'Google Doc link for this prompt');
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
     addBtn.textContent = 'Add';
@@ -604,13 +619,14 @@ function renderEssayTracker(){
       const text = textInput.value.trim();
       if(!text) return;
       const wordLimit = wordInput.value.trim();
+      const link = linkInput.value.trim();
       const current = loadEssays(name);
-      current.push({ text, wordLimit, done: false });
+      current.push({ text, wordLimit, link, done: false });
       saveEssays(name, current);
       renderEssayTracker();
     }
     addBtn.addEventListener('click', addEssay);
-    [textInput, wordInput].forEach(input => {
+    [textInput, wordInput, linkInput].forEach(input => {
       input.addEventListener('keydown', (e) => {
         if(e.key === 'Enter'){
           e.preventDefault();
@@ -620,12 +636,41 @@ function renderEssayTracker(){
     });
     addRow.appendChild(textInput);
     addRow.appendChild(wordInput);
+    addRow.appendChild(linkInput);
     addRow.appendChild(addBtn);
     details.appendChild(addRow);
 
     essayTrackerBody.appendChild(details);
   });
 }
+
+// Doc-link widgets: a single saved Google Doc URL each for the personal
+// statement and the activities list (both shared across every school, so
+// unlike essay prompts they don't need a per-school key). Only the link is
+// stored — the actual writing stays in her Google Doc.
+function setupDocLink(inputId, openId, storageKey){
+  const input = document.getElementById(inputId);
+  const open = document.getElementById(openId);
+  if(!input || !open) return;
+
+  function refresh(){
+    const url = localStorage.getItem(storageKey) || '';
+    input.value = url;
+    if(url){
+      open.href = url;
+      open.hidden = false;
+    } else {
+      open.hidden = true;
+    }
+  }
+  input.addEventListener('input', () => {
+    localStorage.setItem(storageKey, input.value.trim());
+    refresh();
+  });
+  refresh();
+}
+setupDocLink('personalStatementLink', 'personalStatementOpen', 'college-roadmap-doclink-personal-statement');
+setupDocLink('activitiesListLink', 'activitiesListOpen', 'college-roadmap-doclink-activities-list');
 
 // Her personal target is October 30, 2026 — a buffer before the Nov 30
 // hard deadline, per the October timeline callout.

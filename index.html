@@ -26,7 +26,7 @@
 
   <div class="sticky">
     <nav class="nav">
-      <a href="#schools">Programs to Consider</a><a href="#mylist">Lotus's List</a><a href="#recommenders">Recommenders</a><a href="#essaytracker">Essay Tracker</a><a href="#timeline">Timeline</a><a href="#platforms">Application Platforms</a>
+      <a href="#schools">Programs to Consider</a><a href="#mylist">Lotus's List</a><a href="#recommenders">Recommenders</a><a href="#essaytracker">Writing Tracker</a><a href="#timeline">Timeline</a><a href="#platforms">Application Platforms</a>
       <a href="#deadlines">Deadlines</a><a href="#aid">Financial Aid</a><a href="#psych">Psychology Prep</a>
     </nav>
   </div>
@@ -187,8 +187,24 @@
   </section>
 
   <section class="card" id="essaytracker">
-    <h2>📝 ESSAY TRACKER</h2>
-    <div class="card-body" id="essayTrackerBody">
+    <h2>📝 WRITING TRACKER</h2>
+    <div class="card-body">
+      <div class="doclink-widget">
+        <strong>Personal Statement</strong>
+        <div class="doclink">
+          <input type="url" id="personalStatementLink" placeholder="Paste her Google Doc link…" aria-label="Personal statement Google Doc link">
+          <a id="personalStatementOpen" class="doclink-open" href="#" target="_blank" rel="noopener" hidden>Open in Google Docs ↗</a>
+        </div>
+      </div>
+      <div class="doclink-widget">
+        <strong>Activities List</strong>
+        <div class="doclink">
+          <input type="url" id="activitiesListLink" placeholder="Paste her Google Doc link…" aria-label="Activities list Google Doc link">
+          <a id="activitiesListOpen" class="doclink-open" href="#" target="_blank" rel="noopener" hidden>Open in Google Docs ↗</a>
+        </div>
+      </div>
+      <p class="note">Links only — the actual writing stays in her Google Docs, never copied into this page.</p>
+      <div id="essayTrackerBody"></div>
     </div>
   </section>
 
