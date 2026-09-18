@@ -668,9 +668,117 @@ function setupDocLink(inputId, openId, storageKey){
     refresh();
   });
   refresh();
+  return refresh;
 }
-setupDocLink('personalStatementLink', 'personalStatementOpen', 'college-roadmap-doclink-personal-statement');
-setupDocLink('activitiesListLink', 'activitiesListOpen', 'college-roadmap-doclink-activities-list');
+const refreshPersonalStatementLink = setupDocLink('personalStatementLink', 'personalStatementOpen', 'college-roadmap-doclink-personal-statement');
+const refreshActivitiesListLink = setupDocLink('activitiesListLink', 'activitiesListOpen', 'college-roadmap-doclink-activities-list');
+
+// Google Drive picker (optional): lets her pick a doc straight from her
+// Drive instead of copy-pasting a link. Fill in GOOGLE_API_KEY and
+// GOOGLE_CLIENT_ID below — see README for the Google Cloud Console setup
+// steps — to turn this on; until then the "Choose from Drive" buttons stay
+// disabled and manual link-pasting keeps working exactly as before.
+//
+// Uses the narrow drive.file scope, not full Drive access: the app only
+// ever sees a file after she explicitly picks it in the dialog, never her
+// whole Drive.
+const GOOGLE_API_KEY = '';
+const GOOGLE_CLIENT_ID = '';
+const GOOGLE_DRIVE_SCOPE = 'https://www.googleapis.com/auth/drive.file';
+
+function googleIntegrationConfigured(){
+  return Boolean(GOOGLE_API_KEY && GOOGLE_CLIENT_ID);
+}
+
+let googleAccessToken = null;
+let googleTokenClient = null;
+let googlePickerApiLoaded = false;
+
+function loadScriptOnce(src, onload){
+  const existing = document.querySelector('script[src="' + src + '"]');
+  if(existing){
+    if(window.__scriptLoaded && window.__scriptLoaded[src]){ onload(); }
+    else existing.addEventListener('load', onload, { once: true });
+    return;
+  }
+  const script = document.createElement('script');
+  script.src = src;
+  script.onload = () => {
+    window.__scriptLoaded = window.__scriptLoaded || {};
+    window.__scriptLoaded[src] = true;
+    onload();
+  };
+  document.head.appendChild(script);
+}
+
+function ensureGooglePickerLoaded(callback){
+  loadScriptOnce('https://apis.google.com/js/api.js', () => {
+    if(googlePickerApiLoaded){ callback(); return; }
+    gapi.load('picker', () => {
+      googlePickerApiLoaded = true;
+      callback();
+    });
+  });
+}
+
+function ensureGoogleAuth(callback){
+  function requestToken(){
+    if(googleAccessToken){ callback(); return; }
+    googleTokenClient = google.accounts.oauth2.initTokenClient({
+      client_id: GOOGLE_CLIENT_ID,
+      scope: GOOGLE_DRIVE_SCOPE,
+      callback: (resp) => {
+        if(resp.error){
+          console.warn('Google Drive sign-in failed', resp);
+          return;
+        }
+        googleAccessToken = resp.access_token;
+        callback();
+      },
+    });
+    googleTokenClient.requestAccessToken();
+  }
+  loadScriptOnce('https://accounts.google.com/gsi/client', requestToken);
+}
+
+function openDrivePicker(onPick){
+  ensureGooglePickerLoaded(() => {
+    ensureGoogleAuth(() => {
+      const view = new google.picker.DocsView(google.picker.ViewId.DOCS)
+        .setMimeTypes('application/vnd.google-apps.document');
+      const picker = new google.picker.PickerBuilder()
+        .addView(view)
+        .setOAuthToken(googleAccessToken)
+        .setDeveloperKey(GOOGLE_API_KEY)
+        .setCallback((data) => {
+          if(data.action === google.picker.Action.PICKED){
+            const doc = data.docs[0];
+            onPick({ id: doc.id, name: doc.name, url: doc.url });
+          }
+        })
+        .build();
+      picker.setVisible(true);
+    });
+  });
+}
+
+function setupDriveChooseButton(buttonId, storageKey, refresh){
+  const btn = document.getElementById(buttonId);
+  if(!btn) return;
+  if(!googleIntegrationConfigured()){
+    btn.disabled = true;
+    btn.title = 'Not set up yet — add a Google API key and Client ID (see README) to enable this.';
+    return;
+  }
+  btn.addEventListener('click', () => {
+    openDrivePicker((doc) => {
+      localStorage.setItem(storageKey, doc.url);
+      refresh();
+    });
+  });
+}
+setupDriveChooseButton('personalStatementChoose', 'college-roadmap-doclink-personal-statement', refreshPersonalStatementLink);
+setupDriveChooseButton('activitiesListChoose', 'college-roadmap-doclink-activities-list', refreshActivitiesListLink);
 
 // Her personal target is October 30, 2026 — a buffer before the Nov 30
 // hard deadline, per the October timeline callout.
