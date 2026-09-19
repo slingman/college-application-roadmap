@@ -129,6 +129,11 @@ const myListBody = document.getElementById('myListBody');
 const customInput = document.getElementById('customSchoolInput');
 const addSchoolBtn = document.getElementById('addSchoolBtn');
 const essayTrackerBody = document.getElementById('essayTrackerBody');
+// Declared this early (before the doc-link widgets below call refresh() at
+// load time, which needs to check this) to avoid a temporal-dead-zone
+// error — a `let` declared later in the file isn't usable yet even though
+// the function referencing it is already hoisted.
+let googleAccessToken = null;
 
 function schoolKey(name){ return 'college-roadmap-school-' + name; }
 
@@ -644,17 +649,36 @@ function renderEssayTracker(){
   });
 }
 
-// Doc-link widgets: a single saved Google Doc URL each for the personal
-// statement and the activities list (both shared across every school, so
-// unlike essay prompts they don't need a per-school key). Only the link is
-// stored — the actual writing stays in her Google Doc.
-function setupDocLink(inputId, openId, storageKey){
+// Doc-link widgets: a single saved Google Doc link each for the personal
+// statement, UC PIQs, and the activities list (all shared across every
+// school, so unlike essay prompts they don't need a per-school key).
+// Stored as {url, fileId} — fileId is only set when the doc was added via
+// "Choose from Drive" (see below), since that's what grants the page
+// permission to look up the file at all; a pasted link has no fileId and
+// stats just stay hidden for it. Falls back to reading a plain string for
+// links saved before this fileId tracking existed.
+function loadDocLinkValue(storageKey){
+  const raw = localStorage.getItem(storageKey);
+  if(!raw) return { url: '', fileId: null };
+  try {
+    const parsed = JSON.parse(raw);
+    if(parsed && typeof parsed === 'object') return { url: parsed.url || '', fileId: parsed.fileId || null };
+  } catch(e){
+    // Pre-existing plain-string link from before fileId tracking.
+  }
+  return { url: raw, fileId: null };
+}
+function saveDocLinkValue(storageKey, value){
+  localStorage.setItem(storageKey, JSON.stringify(value));
+}
+
+function setupDocLink(inputId, openId, statsId, storageKey, wordLimit, limitLabel){
   const input = document.getElementById(inputId);
   const open = document.getElementById(openId);
   if(!input || !open) return;
 
   function refresh(){
-    const url = localStorage.getItem(storageKey) || '';
+    const { url, fileId } = loadDocLinkValue(storageKey);
     input.value = url;
     if(url){
       open.href = url;
@@ -662,16 +686,21 @@ function setupDocLink(inputId, openId, storageKey){
     } else {
       open.hidden = true;
     }
+    renderDocStats(statsId, fileId, wordLimit, limitLabel);
   }
   input.addEventListener('input', () => {
-    localStorage.setItem(storageKey, input.value.trim());
+    saveDocLinkValue(storageKey, { url: input.value.trim(), fileId: null });
     refresh();
   });
   refresh();
   return refresh;
 }
-const refreshPersonalStatementLink = setupDocLink('personalStatementLink', 'personalStatementOpen', 'college-roadmap-doclink-personal-statement');
-const refreshActivitiesListLink = setupDocLink('activitiesListLink', 'activitiesListOpen', 'college-roadmap-doclink-activities-list');
+const refreshPersonalStatementLink = setupDocLink('personalStatementLink', 'personalStatementOpen', 'personalStatementStats', 'college-roadmap-doclink-personal-statement', 650, '650 words');
+// UC requires 4 of 8 PIQs at 350 words each — if she drafts all 4 in one
+// doc, 1,400 is the combined budget across all of them, not one prompt's
+// limit, so the label spells that out rather than implying a single cap.
+const refreshPiqsLink = setupDocLink('piqsLink', 'piqsOpen', 'piqsStats', 'college-roadmap-doclink-piqs', 1400, '4 × 350 words combined');
+const refreshActivitiesListLink = setupDocLink('activitiesListLink', 'activitiesListOpen', 'activitiesListStats', 'college-roadmap-doclink-activities-list', null, null);
 
 // Google Drive picker (optional): lets her pick a doc straight from her
 // Drive instead of copy-pasting a link. Fill in GOOGLE_API_KEY and
@@ -681,16 +710,16 @@ const refreshActivitiesListLink = setupDocLink('activitiesListLink', 'activities
 //
 // Uses the narrow drive.file scope, not full Drive access: the app only
 // ever sees a file after she explicitly picks it in the dialog, never her
-// whole Drive.
+// whole Drive. documents.readonly is scoped the same way in practice here —
+// it only ever gets used against a file ID that came from a drive.file pick.
 const GOOGLE_API_KEY = 'AIzaSyBytGQe8kXA9Ah0yv6bqmr-_h8UgZArfN4';
 const GOOGLE_CLIENT_ID = '617506186509-nbo68upteh4k1j7v0ohj7e31s65t86mk.apps.googleusercontent.com';
-const GOOGLE_DRIVE_SCOPE = 'https://www.googleapis.com/auth/drive.file';
+const GOOGLE_DRIVE_SCOPE = 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/documents.readonly';
 
 function googleIntegrationConfigured(){
   return Boolean(GOOGLE_API_KEY && GOOGLE_CLIENT_ID);
 }
 
-let googleAccessToken = null;
 let googleTokenClient = null;
 let googlePickerApiLoaded = false;
 
@@ -772,13 +801,88 @@ function setupDriveChooseButton(buttonId, storageKey, refresh){
   }
   btn.addEventListener('click', () => {
     openDrivePicker((doc) => {
-      localStorage.setItem(storageKey, doc.url);
+      saveDocLinkValue(storageKey, { url: doc.url, fileId: doc.id });
       refresh();
+      refreshAllDocStats();
     });
   });
 }
 setupDriveChooseButton('personalStatementChoose', 'college-roadmap-doclink-personal-statement', refreshPersonalStatementLink);
+setupDriveChooseButton('piqsChoose', 'college-roadmap-doclink-piqs', refreshPiqsLink);
 setupDriveChooseButton('activitiesListChoose', 'college-roadmap-doclink-activities-list', refreshActivitiesListLink);
+
+// Doc stats: last-edited time (Drive API) and, when a word limit is given,
+// a live word count (Docs API — needs the documents.readonly scope above).
+// Both require a fileId, which only exists for a doc added via the picker;
+// a manually pasted link has no fileId and stats just stay blank for it.
+function formatRelativeTime(isoString){
+  const then = new Date(isoString);
+  const diffMs = Date.now() - then.getTime();
+  const minutes = Math.round(diffMs / 60000);
+  if(minutes < 1) return 'just now';
+  if(minutes < 60) return minutes + ' minute' + (minutes === 1 ? '' : 's') + ' ago';
+  const hours = Math.round(minutes / 60);
+  if(hours < 24) return hours + ' hour' + (hours === 1 ? '' : 's') + ' ago';
+  const days = Math.round(hours / 24);
+  if(days < 30) return days + ' day' + (days === 1 ? '' : 's') + ' ago';
+  return then.toLocaleDateString();
+}
+
+function countWordsInDoc(doc){
+  let text = '';
+  (doc.body && doc.body.content ? doc.body.content : []).forEach(el => {
+    if(!el.paragraph) return;
+    (el.paragraph.elements || []).forEach(pe => {
+      if(pe.textRun && pe.textRun.content) text += pe.textRun.content;
+    });
+  });
+  const words = text.trim().split(/\s+/).filter(Boolean);
+  return words.length;
+}
+
+function renderDocStats(statsId, fileId, wordLimit, limitLabel){
+  const el = document.getElementById(statsId);
+  if(!el) return;
+  // Deliberately does NOT call ensureGoogleAuth here — that opens a Google
+  // sign-in popup, and triggering that automatically on page load (rather
+  // than from a direct click) gets blocked by most browsers anyway. Stats
+  // only populate once she's already signed in this session (via clicking
+  // a "Choose from Drive" button somewhere), at which point
+  // refreshAllDocStats() re-runs this for every widget that has a fileId.
+  if(!fileId || !googleAccessToken){
+    el.textContent = '';
+    return;
+  }
+  el.textContent = 'Loading…';
+  fetch('https://www.googleapis.com/drive/v3/files/' + fileId + '?fields=modifiedTime', {
+    headers: { Authorization: 'Bearer ' + googleAccessToken },
+  })
+    .then(res => res.ok ? res.json() : Promise.reject(res.status))
+    .then(meta => {
+      const parts = ['Last edited ' + formatRelativeTime(meta.modifiedTime)];
+      if(!wordLimit){
+        el.textContent = parts.join(' · ');
+        return;
+      }
+      fetch('https://docs.googleapis.com/v1/documents/' + fileId, {
+        headers: { Authorization: 'Bearer ' + googleAccessToken },
+      })
+        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(doc => {
+          const count = countWordsInDoc(doc);
+          parts.push(count.toLocaleString() + ' / ' + (limitLabel || wordLimit + ' words'));
+          el.textContent = parts.join(' · ');
+        })
+        .catch(() => { el.textContent = parts.join(' · '); });
+    })
+    .catch(() => { el.textContent = ''; });
+}
+
+function refreshAllDocStats(){
+  [refreshPersonalStatementLink, refreshPiqsLink, refreshActivitiesListLink].forEach(fn => {
+    if(typeof fn === 'function') fn();
+  });
+}
 
 // Her personal target is October 30, 2026 — a buffer before the Nov 30
 // hard deadline, per the October timeline callout.
